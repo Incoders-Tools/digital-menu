@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="site-title"></title>
+    <link rel="icon" type="image/png" href="imgs/bergbach-favicon.svg">
+
+    <!-- Tiny Slider CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+
+    <!-- Own Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1 id="header-title"></h1>
+            <p id="header-subtitle" class="subtitle"></p>
+            <div class="language-selector dropdown">
+                <button id="language-button">
+                    <img id="current-flag" src="flags/es.svg" alt="Idioma actual" />
+                </button>
+                <ul class="dropdown-menu" id="language-options">
+                    <li data-lang="es"><img src="assets/flags/es.svg" alt="Español" /> Español</li>
+                    <li data-lang="en"><img src="assets/flags/en.svg" alt="English" /> English</li>
+                    <li data-lang="fr"><img src="assets/flags/fr.svg" alt="Français" /> Français</li>
+                </ul>
+            </div>            
+        </div>
+    </header>
+
+    <div class="loader-overlay" style="display: none;">
+        <div class="loader-content">
+            <div id="lottie-loader" class="lottie-loader"></div>
+            <div class="loader-text"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <main class="main-menu">
+            <div class="menu-grid">
+                <div class="menu-item" onclick="location.href='components/starters/starters.html'">
+                    <h2 data-i18n="menu.starters"></h2>
+                </div>
+                <div class="menu-item" onclick="location.href='main-courses.html'">
+                    <h2 data-i18n="menu.main_courses">Main Courses</h2>
+                </div>
+                <div class="menu-item" onclick="location.href='drinks.html'">
+                    <h2 data-i18n="menu.drinks">Drinks</h2>
+                </div>
+                <div class="menu-item" onclick="location.href='desserts.html'">
+                    <h2 data-i18n="menu.desserts">Desserts</h2>
+                </div>
+            </div>
+        </main>
+        <!-- <div id="products-container" class="products-grid"></div> -->
+    </div>
+
+    <div id="product-detail-modal" class="product-detail-modal">
+        <div class="modal-content">
+            <div class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="product-detail" id="modal-content">
+                <!-- Contenido dinámico del modal -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3 id="footer-title"></h3>
+            <p id="footer-description"></p>
+            <div class="social-links" id="social-links-container">
+                <!-- Enlaces sociales generados dinámicamente -->
+            </div>
+            <p id="copyright"></p>
+        </div>
+    </footer>
+
+    <!-- Cargar primero los scripts de terceros -->
+    <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
+
+    <!-- Tiny Slider JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+
+
+    <!-- Cargar la configuración -->
+    <script type="module" src="config/config.js"></script>
+
+    <!-- Luego los scripts propios -->
+    <script type="module" src="js/app.js"></script>
+
+    <!-- Script para aplicar la configuración -->
+    <script type="module" src="js/setup.js"></script>
+    <script type="module" src="services/ProductService.js"></script>
+</body>
+
+</html>
