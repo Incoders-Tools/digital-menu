@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo base -->
+  <rect width="100%" height="100%" fill="#1a1a2e" />
+  
+  <!-- Gradiente moderno -->
+  <defs>
+    <linearGradient id="modernGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16213e" />
+      <stop offset="100%" stop-color="#0f3460" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#modernGradient)" />
+  
+  <!-- Patrones geométricos modernos -->
+  <g opacity="0.15">
+    <path d="M0,50 L1200,50" stroke="#e94560" stroke-width="1" />
+    <path d="M0,150 L1200,150" stroke="#e94560" stroke-width="0.5" />
+    <path d="M0,250 L1200,250" stroke="#e94560" stroke-width="0.8" />
+    <path d="M0,350 L1200,350" stroke="#e94560" stroke-width="0.3" />
+  </g>
+  
+  <!-- Elementos decorativos minimalistas -->
+  <g opacity="0.2">
+    <circle cx="100" cy="100" r="40" fill="#e94560" />
+    <circle cx="1100" cy="300" r="60" fill="#e94560" />
+    
+    <!-- Formas geométricas modernas -->
+    <rect x="300" y="80" width="40" height="40" fill="#e94560" transform="rotate(45, 320, 100)" />
+    <rect x="800" y="200" width="60" height="60" fill="#e94560" transform="rotate(30, 830, 230)" />
+    
+    <!-- Líneas diagonales -->
+    <line x1="200" y1="0" x2="400" y2="200" stroke="#e94560" stroke-width="1" />
+    <line x1="900" y1="50" x2="1000" y2="150" stroke="#e94560" stroke-width="1" />
+    <line x1="600" y1="250" x2="700" y2="350" stroke="#e94560" stroke-width="1" />
+  </g>
+  
+  <!-- Elementos abstractos de comida moderna -->
+  <g opacity="0.08">
+    <path d="M500,100 C550,50 650,50 700,100 C750,150 750,250 700,300 C650,350 550,350 500,300 C450,250 450,150 500,100 Z" fill="#ffffff" />
+    <circle cx="950" cy="120" r="25" fill="#ffffff" />
+    <circle cx="250" cy="280" r="35" fill="#ffffff" />
+  </g>
+  
+  <!-- Elemento decorativo sutil en la parte inferior -->
+  <path d="M0,380 Q600,350 1200,380" stroke="#e94560" stroke-width="0.5" fill="none" />
+</svg>

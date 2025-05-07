@@ -8,7 +8,9 @@ class AppFooter extends HTMLElement {
 
   async connectedCallback() {
     const [html, css] = await Promise.all([
-      fetch(new URL("./footer.html", import.meta.url)).then((res) => res.text()),
+      fetch(new URL("./footer.html", import.meta.url)).then((res) =>
+        res.text()
+      ),
       fetch(new URL("./footer.css", import.meta.url)).then((res) => res.text()),
     ]);
 
@@ -26,8 +28,11 @@ class AppFooter extends HTMLElement {
   setContent() {
     const root = this.shadowRoot;
     root.getElementById("footer-title").textContent = storeConfig.footer.title;
-    root.getElementById("footer-description").textContent = storeConfig.footer.description;
-    root.getElementById("copyright").textContent = `© ${storeConfig.site.copyright}`;
+    root.getElementById("footer-description").textContent =
+      storeConfig.footer.description;
+    root.getElementById(
+      "copyright"
+    ).textContent = `© ${storeConfig.site.copyright}`;
 
     const socialLinksContainer = root.getElementById("social-links-container");
     storeConfig.footer.socialLinks.forEach((link) => {

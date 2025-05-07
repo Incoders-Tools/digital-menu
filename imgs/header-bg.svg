@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo base -->
+  <rect width="100%" height="100%" fill="#f9f7f5" />
+  
+  <!-- Patrón sutil de líneas diagonales -->
+  <pattern id="patternLines" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#e6e1dd" stroke-width="1" />
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#patternLines)" />
+  
+  <!-- Elementos gráficos sutiles -->
+  <g opacity="0.12">
+    <!-- Círculos decorativos -->
+    <circle cx="200" cy="150" r="80" fill="#8a6d5d" />
+    <circle cx="950" cy="300" r="120" fill="#8a6d5d" />
+    <circle cx="600" cy="50" r="60" fill="#8a6d5d" />
+    
+    <!-- Elementos abstractos de cubiertos -->
+    <g transform="translate(300, 200) rotate(-30)" opacity="0.8">
+      <rect x="-5" y="-60" width="10" height="120" rx="5" fill="#725a4b" />
+      <circle cx="0" cy="-75" r="20" fill="#725a4b" />
+    </g>
+    
+    <g transform="translate(850, 100) rotate(15)" opacity="0.8">
+      <rect x="-5" y="-60" width="10" height="120" rx="5" fill="#725a4b" />
+      <path d="M-20,-80 C-20,-100 20,-100 20,-80 L0,-60 Z" fill="#725a4b" />
+    </g>
+  </g>
+  
+  <!-- Línea horizontal sutil -->
+  <line x1="0" y1="380" x2="1200" y2="380" stroke="#d1c6bf" stroke-width="1" />
+  
+  <!-- Elementos sutiles de comida -->
+  <g opacity="0.08">
+    <circle cx="100" cy="320" r="40" fill="#8a6d5d" />
+    <circle cx="1100" cy="100" r="30" fill="#8a6d5d" />
+    <circle cx="500" cy="350" r="25" fill="#8a6d5d" />
+    <circle cx="700" cy="80" r="35" fill="#8a6d5d" />
+  </g>
+</svg>
