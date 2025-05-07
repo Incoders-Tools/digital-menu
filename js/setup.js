@@ -1,5 +1,6 @@
 import { storeConfig } from "../config/config.js";
 import { initLanguageSelector } from "../components/language-selector/language-selector.js";
+import { initFooter } from "../components/footer/footer.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   // Set page title
@@ -16,22 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   await initLanguageSelector();
 
   // Set footer
-  document.getElementById("footer-title").textContent =
-    storeConfig.footer.title;
-  document.getElementById("footer-description").textContent =
-    storeConfig.footer.description;
-
-  // Set social links
-  const socialLinksContainer = document.getElementById("social-links-container");
-  socialLinksContainer.innerHTML = "";
-  storeConfig.footer.socialLinks.forEach((link) => {
-    const a = document.createElement("a");
-    a.href = link.url;
-    const i = document.createElement("i");
-    i.className = `fab fa-${link.platform}`;
-    a.appendChild(i);
-    socialLinksContainer.appendChild(a);
-  });
+  initFooter();
 
   // Set copyright
   document.getElementById("copyright").textContent =

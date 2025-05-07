@@ -1,0 +1,38 @@
+.category-slider {
+    margin: 1rem 0;
+}
+
+.slider-wrapper {
+    overflow-x: auto;
+}
+
+.my-slider {
+    display: flex;
+    gap: 1rem;
+}
+
+.slide-item {
+    padding: 0.5rem 1rem;
+    background: #eee;
+    border-radius: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.slide-item.active {
+    background-color: #333;
+    color: white;
+}
+
+/* Mobile: mostrar como tabs sin usar Tiny Slider */
+@media (max-width: 768px) {
+    .tns-outer {
+        display: none !important;
+    }
+
+    .my-slider {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+}

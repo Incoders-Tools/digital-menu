@@ -1,8 +1,6 @@
 import { apiConfig } from '../config/config.js';
 import { LoaderService } from '../services/LoaderService.js';
 import { ProductService } from '../services/ProductService.js';
-import { FilterService } from '../services/FilterService.js';
-import { UIService } from '../services/UIService.js';
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
 import { ProductDetailModalComponent } from '../components/ProductDetailModalComponent.js';
 
@@ -14,15 +12,6 @@ let displayedProducts = []; // Nuevo: almacenar productos mostrados
 
 // Inicializar todo cuando la página se carga
 window.onload = function() {
-    // Inicializar eventos de filtros
-    initEvents();
-
-    // Inicializar animación del loader
-    LoaderService.initLoader();
-
-    // Mostrar el loader mientras se cargan los productos
-    LoaderService.showLoader();
-
     // Cargar productos
     loadProducts().then(() => {
         // Ocultar loader cuando termine la carga
@@ -34,7 +23,6 @@ window.onload = function() {
 async function loadProducts() {
     try {
         LoaderService.showLoader();
-        FilterService.disableFilters();
         
         // Obtener los productos desde Google Sheets
         const products = await productService.fetchProducts();
@@ -57,7 +45,6 @@ async function loadProducts() {
         showErrorPage();
     } finally {
         LoaderService.hideLoader();
-        FilterService.enableFilters();
     }
 }
 
@@ -104,38 +91,6 @@ function closeModal() {
 }
 
 window.closeModal = closeModal;
-
-async function filterProducts() {
-    try {
-        LoaderService.showLoader();
-        FilterService.disableFilters();
-
-        const filters = FilterService.getFilters();
-        const filteredProducts = await productService.getFilteredProducts(filters);
-
-        if (!Array.isArray(filteredProducts)) {
-            console.error('filteredProducts no es un array:', filteredProducts);
-            UIService.renderError('Los productos filtrados no tienen el formato correcto.');
-            return;
-        }
-
-        displayedProducts = [];
-        renderProducts(filteredProducts);
-
-    } catch (error) {
-        console.error('Error al filtrar los productos:', error);
-        UIService.renderError('Hubo un problema al cargar los productos. Intenta nuevamente.');
-    } finally {
-        FilterService.enableFilters();
-        LoaderService.hideLoader();
-    }
-}
-
-// Inicializar los eventos de filtrado
-function initEvents() {
-    FilterService.initSearchEvents(filterProducts);
-    FilterService.initSelectEvents(filterProducts);
-}
 
 // Cerrar modal si se hace clic fuera del contenido
 window.onclick = function(event) {

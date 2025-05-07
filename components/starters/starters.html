@@ -1,65 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Starters</title>
-  <link rel="stylesheet" href="styles/main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starters</h1>
+  </title>
+  <link rel="stylesheet" href="../../styles/main.css" />
+  <link rel="stylesheet" href="../footer/footer.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../category-slider/category-slider.css" />
+  <link rel="stylesheet" href="starters.css" />
 </head>
+
 <body>
 
   <header>
     <div class="header-content">
-      <img src="imgs/restaurant-logo.jpg" class="header-logo" />
+      <a href="../../index.html">
+        <img src="../../imgs/restaurant-logo.jpg" alt="Home" />
+      </a>
       <h1 class="header-title">Starters</h1>
     </div>
   </header>
 
-  <!-- Slider de categorías -->
-  <section class="category-slider">
-    <div class="my-slider">
-      <div class="slide-item">All</div>
-      <div class="slide-item">Cold</div>
-      <div class="slide-item">Hot</div>
-      <div class="slide-item">Vegan</div>
-      <div class="slide-item">Gluten Free</div>
-    </div>
-  </section>
+  <div id="category-slider-container"></div>
 
-  <!-- Productos -->
-  <main class="products-grid">
-    <!-- Los productos se cargarán dinámicamente -->
+  <main class="products-grid" id="products-container">
+    <!-- Productos se cargan por JS -->
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <h3>Contact Us</h3>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="far fa-envelope"></i></a>
-      </div>
-      <p>&copy; 2025 Sample Restaurant</p>
-    </div>
-  </footer>
+  <div id="footer-container"></div>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
-  <script>
-    // Init slider
-    tns({
-      container: '.my-slider',
-      items: 3,
-      slideBy: 'page',
-      autoplay: false,
-      nav: false,
-      controls: false,
-      responsive: {
-        640: { items: 4 },
-        900: { items: 5 }
-      }
-    });
-  </script>
+
+  <script type="module" src="../footer/footer.js"></script>
+  <script type="module" src="starters.js"></script>
+
 </body>
+
 </html>

@@ -28,7 +28,6 @@ export async function initLanguageSelector(containerId = 'language-selector') {
 function setupEvents(container) {
     const langButton = container.querySelector('#language-button');
     const overlay = container.querySelector('#language-overlay');
-    const flag = container.querySelector('#current-flag');
 
     langButton.addEventListener('click', () => {
         overlay.style.display = 'flex';

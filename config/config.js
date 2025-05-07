@@ -11,8 +11,18 @@ export const storeConfig = {
         // Imagen destinada a los preview de los enlaces.
         previewImage: "imgs/bergbach-fragrance-preliminar.jpg",
         loader: {
-            animationUrl: './assets/animations/loader_animation.json',
-            loadingText: "Explorando Platos..."
+            general: {
+                animationUrl: './assets/animations/general_loader_animation.json',
+                loadingText: ""
+            },
+            drinks: {
+                animationUrl: './assets/animations/general_loader_animation.json',
+                loadingText: "Explorando Bebidas..."
+            },
+            desserts: {
+                animationUrl: './assets/animations/general_loader_animation.json',
+                loadingText: "Explorando Postres..."
+            }
         }
     },
     
