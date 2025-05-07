@@ -24,7 +24,7 @@
         </div>
     </header>
 
-    <div id="language-selector"></div>
+    <language-selector></language-selector>
 
     <div class="loader-overlay" style="display: none;">
         <div class="loader-content">
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div id="footer-container"></div>
+    <app-footer></app-footer>
 
     <!-- Cargar primero los scripts de terceros -->
     <script src="https://unpkg.com/lottie-web/build/player/lottie.min.js"></script>
@@ -82,6 +82,9 @@
     <!-- Script para aplicar la configuración -->
     <script type="module" src="js/setup.js"></script>
     <script type="module" src="services/ProductService.js"></script>
+
+    <script type="module" src="components/language-selector/language-selector.js"></script>
+    <script type="module" src="components/footer/footer.js"></script>
 </body>
 
 </html>

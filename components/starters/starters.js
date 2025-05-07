@@ -1,5 +1,4 @@
 import { initCategorySlider } from "../category-slider/category-slider.js";
-import { initFooter } from "../footer/footer.js";
 
 const products = [
   { name: "Bruschetta", category: "vegan" },
@@ -35,7 +34,4 @@ document.addEventListener("DOMContentLoaded", () => {
       initCategorySlider(renderProducts);
       renderProducts("all");
     });
-
-    // Init footer
-    initFooter();
 });
