@@ -387,11 +387,13 @@ h1 {
     justify-content: space-between;
     transform: translateY(-50%);
     z-index: 10;
-    pointer-events: none; /* permite que los botones no bloqueen eventos */
+    pointer-events: none;
+    /* permite que los botones no bloqueen eventos */
 }
 
 .tns-controls button {
-    pointer-events: all; /* necesario para que los botones funcionen */
+    pointer-events: all;
+    /* necesario para que los botones funcionen */
     background: rgba(255, 255, 255, 0.85);
     border: none;
     border-radius: 50%;
@@ -627,39 +629,75 @@ h1 {
 }
 
 /* MAIN MENU */
-.main-menu {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1rem;
-  width: 100%;
-  max-width: 800px;
-  height: 80vh;
+.menu-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0;
+    perspective: 600px;
 }
 
 .menu-item {
-  background-color: #ffffff;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, background 0.2s ease;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: black;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .menu-item:hover {
-  background-color: #f0f0f0;
-  transform: translateY(-5px);
+    background: #eee;
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+}
+
+.top-left {
+    clip-path: path('M0,0 H200 V200 H120 A60,60 0 0,1 0,120 Z');
+}
+
+.top-right {
+    clip-path: path('M0,0 H200 V120 A1,60 0 0,1 120,200 H0 Z');
+}
+
+.bottom-left {
+    clip-path: path('M0,0 H120 A60,60 0 0,1 200,80 V200 H0 Z');
+}
+
+.bottom-right {
+    clip-path: path('M80,0 H200 V200 H0 V80 A60,60 0 0,1 80,0 Z');
+}
+
+.center-circle {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.center-circle {
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.center-circle:hover {
+    background: #eee;
 }

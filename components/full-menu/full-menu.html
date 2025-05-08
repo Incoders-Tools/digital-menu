@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú Completo</title>
+    <link rel="stylesheet" href="../../styles/main.css" />
+    <link rel="stylesheet" href="full-menu.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" />
+</head>
+
+<body>
+
+    <app-header></app-header>
+
+    <language-selector></language-selector>
+
+    <div id="category-slider-container"></div>
+
+    <main id="full-menu-container" class="menu-sections">
+        <!-- Secciones y productos se renderizan dinámicamente -->
+    </main>
+
+    <app-footer></app-footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+    <script type="module" src="../header/header.js"></script>
+    <script type="module" src="../footer/footer.js"></script>
+    <script type="module" src="../category-slider/category-slider.js"></script>
+    <script type="module" src="full-menu.js"></script>
+    <script type="module" src="../language-selector/language-selector.js"></script>
+
+</body>
+
+</html>

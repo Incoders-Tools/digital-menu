@@ -52,10 +52,10 @@ class LanguageSelector extends HTMLElement {
 
   async setLanguage(lang) {
     const flag = this.shadowRoot.querySelector("#current-flag");
-    flag.src = `./components/language-selector/flags/${lang}.svg`;
+    flag.src = `./flags/${lang}.svg`;
     localStorage.setItem("selectedLang", lang);
 
-    const res = await fetch(`assets/i18n/${lang}.json`);
+    const res = await fetch(`../../assets/i18n/${lang}.json`);
     const translations = await res.json();
 
     // Actualiza textos en el DOM global (fuera del shadow root)

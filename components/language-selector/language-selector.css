@@ -3,7 +3,7 @@
 }
 
 .language-selector {
-    position: fixed;
+    position: fixed !important;
     top: 1rem;
     right: 1rem;
     z-index: 2000;
@@ -40,6 +40,8 @@
     justify-content: center;
     overflow-y: auto;
     padding: 1rem;
+    font-size: 1rem;
+    transform: scale(1);
 }
 
 .language-options {
