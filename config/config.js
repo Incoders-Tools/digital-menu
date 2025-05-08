@@ -7,7 +7,7 @@ export const storeConfig = {
         subtitle: "#SloganOrSubtitle",
         copyright: "2025 Incoders - Software Techonolgies. All rights reserved.",
         title: "#MenuTitle",
-        url: "http://127.0.0.1:8080/",
+        url: "https://incoders-tools.github.io/digital-menu/",
         // Imagen destinada a los preview de los enlaces.
         previewImage: "imgs/bergbach-fragrance-preliminar.jpg",
         loader: {
