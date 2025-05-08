@@ -28,22 +28,15 @@
     </div>
 
     <div class="menu-container">
-        <div class="menu-item top-left" data-i18n="menu.starters" onclick="location.href='components/starters/starters.html'">Entrantes</div>
-        <div class="menu-item top-right" data-i18n="menu.main_courses" onclick="location.href='main-courses.html'">PlatoPrincipal</div>
+        <div class="menu-item top-left" data-i18n="menu.starters"
+            onclick="location.href='components/starters/starters.html'">Entrantes</div>
+        <div class="menu-item top-right" data-i18n="menu.main_courses" onclick="location.href='main-courses.html'">
+            PlatoPrincipal</div>
         <div class="menu-item bottom-left" data-i18n="menu.drinks" onclick="location.href='drinks.html'">Bebidas</div>
-        <div class="menu-item bottom-right" data-i18n="menu.desserts" onclick="location.href='desserts.html'">Postres</div>
-        <div class="center-circle" data-i18n="menu.full_menu" onclick="location.href='components/full-menu/full-menu.html'">Full Menu</div>
-    </div>
-
-    <div id="product-detail-modal" class="product-detail-modal">
-        <div class="modal-content">
-            <div class="close-modal" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="product-detail" id="modal-content">
-                <!-- Contenido dinámico del modal -->
-            </div>
+        <div class="menu-item bottom-right" data-i18n="menu.desserts" onclick="location.href='desserts.html'">Postres
         </div>
+        <div class="center-circle" data-i18n="menu.full_menu"
+            onclick="location.href='components/full-menu/full-menu.html'">Full Menu</div>
     </div>
 
     <app-footer></app-footer>
@@ -54,34 +47,29 @@
     <!-- Tiny Slider JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 
-
     <!-- Cargar la configuración -->
-    <script type="module" src="config/config.js"></script>
+    <script type="module" src="./main.js"></script>
 
     <!-- Luego los scripts propios -->
     <!--<script type="module" src="js/app.js"></script>-->
 
-    <!-- Script para aplicar la configuración -->
-    <script type="module" src="js/setup.js"></script>
-    <script type="module" src="services/ProductService.js"></script>
-
     <!-- Modulos Propios -->
-    <script type="module" src="components/header/header.js"></script>
-    <script type="module" src="components/language-selector/language-selector.js"></script>
-    <script type="module" src="components/footer/footer.js"></script>
+    <script type="module" src="./components/header/header.js"></script>
+    <script type="module" src="./components/language-selector/language-selector.js"></script>
+    <script type="module" src="./components/footer/footer.js"></script>
 
     <script type="module">
-        import TranslationService from '/assets/i18n/translationService.js';
-      
+        import TranslationService from './assets/i18n/translationService.js';
+
         // Cargar el idioma al cargar la página
         await TranslationService.loadTranslations();
         TranslationService.translatePage();
-      
+
         // Escuchar cambios de idioma (si otros componentes los disparan)
         document.addEventListener('translationsReady', () => {
-          TranslationService.translatePage();
+            TranslationService.translatePage();
         });
-      </script>      
+    </script>
 </body>
 
 </html>
