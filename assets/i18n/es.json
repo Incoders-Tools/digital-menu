@@ -4,5 +4,6 @@
     "menu.drinks": "Bebidas",
     "menu.desserts": "Postres",
     "menu.full_menu": "Menu completo",
-    "full-menu.title": "Menu completo"
+    "full-menu.title": "Menu completo",
+    "navbar.home-btn": "Inicio"
 }

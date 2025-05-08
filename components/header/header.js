@@ -30,20 +30,11 @@ class AppHeader extends HTMLElement {
   initContent(appearance) {
     const site = storeConfig.site;
 
-    if (appearance === "Navbar") {
+    if (appearance === "navbar") {
       const homeBtn = this.shadowRoot.getElementById("home-btn");
       if (homeBtn) {
         homeBtn.addEventListener("click", () => {
           window.location.href = site.url;
-        });
-      }
-
-      const langSelect = this.shadowRoot.getElementById("lang-select");
-      if (langSelect) {
-        langSelect.addEventListener("change", (e) => {
-          const selectedLang = e.target.value;
-          console.log("Idioma seleccionado:", selectedLang);
-          // Aquí podrías emitir un evento o usar i18n para cambiar idioma
         });
       }
     } else {

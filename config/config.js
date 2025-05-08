@@ -7,7 +7,7 @@ export const storeConfig = {
         subtitle: "#SloganOrSubtitle",
         copyright: "2025 Incoders - Software Techonolgies. All rights reserved.",
         title: "#MenuTitle",
-        url: "https://bergbach-fragrance.github.io/catalog/",
+        url: "http://127.0.0.1:8080/",
         // Imagen destinada a los preview de los enlaces.
         previewImage: "imgs/bergbach-fragrance-preliminar.jpg",
         loader: {
