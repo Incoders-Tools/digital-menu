@@ -28,11 +28,7 @@ class AppFooter extends HTMLElement {
   setContent() {
     const root = this.shadowRoot;
     root.getElementById("footer-title").textContent = storeConfig.footer.title;
-    root.getElementById("footer-description").textContent =
-      storeConfig.footer.description;
-    root.getElementById(
-      "copyright"
-    ).textContent = `© ${storeConfig.site.copyright}`;
+    root.getElementById("footer-description").textContent = storeConfig.footer.description;
 
     const socialLinksContainer = root.getElementById("social-links-container");
     storeConfig.footer.socialLinks.forEach((link) => {
@@ -43,6 +39,8 @@ class AppFooter extends HTMLElement {
       a.appendChild(i);
       socialLinksContainer.appendChild(a);
     });
+
+    root.getElementById("copyright").textContent = `© ${storeConfig.footer.copyright}`;
   }
 }
 

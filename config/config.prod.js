@@ -5,7 +5,6 @@ export const storeConfig = {
         description: "#TabDescription",
         shortName: "#ShortName",
         subtitle: "#SloganOrSubtitle",
-        copyright: "2025 Incoders - Software Techonolgies. All rights reserved.",
         title: "#MenuTitle",
         url: "https://incoders-tools.github.io/digital-menu/",
         // Imagen destinada a los preview de los enlaces.
@@ -42,7 +41,8 @@ export const storeConfig = {
             { platform: "facebook", url: "#" },
             { platform: "instagram", url: "#" },
             { platform: "whatsapp", url: "#" }
-        ]
+        ],
+        copyright: "2025 Incoders - Software Techonolgies. All rights reserved.",
     }
 };
 
