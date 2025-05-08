@@ -2,5 +2,7 @@
     "menu.starters": "Entradas",
     "menu.main_courses": "Pratos Principais",
     "menu.drinks": "Bebidas",
-    "menu.desserts": "Sobremesas"
+    "menu.desserts": "Sobremesas",
+    "menu.full_menu": "#PT_MENU_FULL_MENU",
+    "full-menu.title": "#STARTERS_TITLE"
 }  

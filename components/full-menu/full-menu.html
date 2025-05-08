@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menú Completo</title>
+    <title data-i18n="full-menu.title">Menú Completo</title>
     <link rel="stylesheet" href="../../styles/main.css" />
     <link rel="stylesheet" href="full-menu.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" />
@@ -14,6 +14,7 @@
 
     <app-header></app-header>
 
+    <h1 data-i18n="full-menu.title"></h1>
     <language-selector></language-selector>
 
     <div id="category-slider-container"></div>
@@ -30,6 +31,20 @@
     <script type="module" src="../category-slider/category-slider.js"></script>
     <script type="module" src="full-menu.js"></script>
     <script type="module" src="../language-selector/language-selector.js"></script>
+    <script type="module" src="../../assets/i18n/translationService.js"></script>
+
+    <script type="module">
+        import TranslationService from '../../assets/i18n/translationService.js';
+
+        // Cargar el idioma al cargar la página
+        await TranslationService.loadTranslations();
+        TranslationService.translatePage();
+
+        // Escuchar cambios de idioma (si otros componentes los disparan)
+        document.addEventListener('translationsReady', () => {
+            TranslationService.translatePage();
+        });
+    </script>
 
 </body>
 

@@ -23,6 +23,9 @@ export const storeConfig = {
                 animationUrl: './assets/animations/general_loader_animation.json',
                 loadingText: "Explorando Postres..."
             }
+        },
+        header: {
+            appearance: "navbar"
         }
     },
     

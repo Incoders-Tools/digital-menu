@@ -28,22 +28,11 @@
     </div>
 
     <div class="menu-container">
-        <div class="menu-item top-left" onclick="location.href='components/starters/starters.html'">
-            Entrantes
-        </div>
-        <div class="menu-item top-right" onclick="location.href='main-courses.html'">
-            Plato Principal
-        </div>
-        <div class="menu-item bottom-left" onclick="location.href='drinks.html'">
-            Bebidas
-        </div>
-        <div class="menu-item bottom-right" onclick="location.href='desserts.html'">
-            Postres
-        </div>
-
-        <div class="center-circle" onclick="location.href='components/full-menu/full-menu.html'">
-            Full Menu
-        </div>
+        <div class="menu-item top-left" data-i18n="menu.starters" onclick="location.href='components/starters/starters.html'">Entrantes</div>
+        <div class="menu-item top-right" data-i18n="menu.main_courses" onclick="location.href='main-courses.html'">PlatoPrincipal</div>
+        <div class="menu-item bottom-left" data-i18n="menu.drinks" onclick="location.href='drinks.html'">Bebidas</div>
+        <div class="menu-item bottom-right" data-i18n="menu.desserts" onclick="location.href='desserts.html'">Postres</div>
+        <div class="center-circle" data-i18n="menu.full_menu" onclick="location.href='components/full-menu/full-menu.html'">Full Menu</div>
     </div>
 
     <div id="product-detail-modal" class="product-detail-modal">
@@ -80,6 +69,19 @@
     <script type="module" src="components/header/header.js"></script>
     <script type="module" src="components/language-selector/language-selector.js"></script>
     <script type="module" src="components/footer/footer.js"></script>
+
+    <script type="module">
+        import TranslationService from '/assets/i18n/translationService.js';
+      
+        // Cargar el idioma al cargar la página
+        await TranslationService.loadTranslations();
+        TranslationService.translatePage();
+      
+        // Escuchar cambios de idioma (si otros componentes los disparan)
+        document.addEventListener('translationsReady', () => {
+          TranslationService.translatePage();
+        });
+      </script>      
 </body>
 
 </html>

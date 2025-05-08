@@ -3,6 +3,7 @@ import { initCategorySlider } from "../category-slider/category-slider.js";
 let products = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
+
   const res = await fetch("../../data/products.json");
   
   const jsonData = await res.json();
@@ -13,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initCategorySlider(renderFullMenu);
   renderFullMenu("all");
 });
-
 
 function renderFullMenu(filteredCategory) {
   const container = document.getElementById("full-menu-container");
