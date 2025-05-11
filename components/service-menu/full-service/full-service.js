@@ -1,34 +1,51 @@
-import { initCategorySlider } from "../../category-slider/category-slider.js";
-
-class FullService extends HTMLElement {
+export class FullService extends HTMLElement {
   constructor() {
     super();
+    this.attachShadow({ mode: "open" });
     this.products = [];
   }
 
   async connectedCallback() {
+    const [html, css] = await Promise.all([
+      fetch(
+        import.meta.url.replace("full-service.js", "full-service.html")
+      ).then((res) => res.text()),
+      fetch(
+        import.meta.url.replace("full-service.js", "full-service.css")
+      ).then((res) => res.text()),
+    ]);
+
+    const style = document.createElement("style");
+    style.textContent = css;
+
+    this.shadowRoot.innerHTML = html;
+    this.shadowRoot.prepend(style); // Inyecta estilos primero
+
+    await this.loadProducts();
+    this.renderFullMenu("all");
+    const { initCategorySlider } = await import(
+      "../../category-slider/category-slider.js"
+    );
+    initCategorySlider(
+      this.shadowRoot.querySelector("#category-slider-container"),
+      this.renderFullMenu.bind(this)
+    );
+  }
+
+  async loadProducts() {
     const res = await fetch("../../../data/products.json");
     const jsonData = await res.json();
     this.products = jsonData.products;
-
-    // Cargar y añadir el slider
-    const sliderHTML = await fetch("../../../components/category-slider/category-slider.html").then(res => res.text());
-    this.innerHTML = `
-      <div id="category-slider-container">${sliderHTML}</div>
-      <div id="full-menu-container"></div>
-    `;
-
-    initCategorySlider(this.renderFullMenu.bind(this));
-    this.renderFullMenu("all");
   }
 
   renderFullMenu(filteredCategory) {
-    const container = this.querySelector("#full-menu-container");
+    const container = this.shadowRoot.querySelector("#full-menu-container");
     container.innerHTML = "";
 
-    const toShow = filteredCategory === "all"
-      ? this.products
-      : this.products.filter((p) => p.category === filteredCategory);
+    const toShow =
+      filteredCategory === "all"
+        ? this.products
+        : this.products.filter((p) => p.category === filteredCategory);
 
     const servicesOrder = ["primary", "drink", "principal", "dessert"];
     const servicesMap = {
@@ -52,7 +69,9 @@ class FullService extends HTMLElement {
         catTitle.textContent = this.getCategoryName(category);
         section.appendChild(catTitle);
 
-        const categoryProducts = serviceProducts.filter((p) => p.category === category);
+        const categoryProducts = serviceProducts.filter(
+          (p) => p.category === category
+        );
         const sections = [...new Set(categoryProducts.map((p) => p.section))];
 
         sections.forEach((sec) => {
@@ -61,8 +80,12 @@ class FullService extends HTMLElement {
           secTitle.textContent = sec;
           section.appendChild(secTitle);
 
-          const sectionProducts = categoryProducts.filter((p) => p.section === sec);
-          const subSectionsOne = [...new Set(sectionProducts.map((p) => p.subSectionOne))];
+          const sectionProducts = categoryProducts.filter(
+            (p) => p.section === sec
+          );
+          const subSectionsOne = [
+            ...new Set(sectionProducts.map((p) => p.subSectionOne)),
+          ];
 
           subSectionsOne.forEach((sub1) => {
             const sub1Title = document.createElement("h5");
@@ -77,11 +100,21 @@ class FullService extends HTMLElement {
                 card.className = "product-card";
 
                 card.innerHTML = `
-                  <div class="product-name">${p.name}</div>
-                  ${p.description ? `<div class="product-description">${p.description}</div>` : ""}
-                  ${p.ingredients ? `<div class="product-ingredients">Ingredientes: ${p.ingredients}</div>` : ""}
-                  <div class="product-price-size">${p.price}${p.size ? " - " + p.size : ""}</div>
-                `;
+                    <div class="product-name">${p.name}</div>
+                    ${
+                      p.description
+                        ? `<div class="product-description">${p.description}</div>`
+                        : ""
+                    }
+                    ${
+                      p.ingredients
+                        ? `<div class="product-ingredients">Ingredientes: ${p.ingredients}</div>`
+                        : ""
+                    }
+                    <div class="product-price-size">${p.price}${
+                  p.size ? " - " + p.size : ""
+                }</div>
+                  `;
 
                 section.appendChild(card);
               });

@@ -1,50 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
+<h1 data-i18n="full-menu.title">Menú Completo</h1>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="full-menu.title">Menú Completo</title>
-    <link rel="stylesheet" href="../../../styles/main.css" />
-    <link rel="stylesheet" href="full-service.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css" />
-</head>
+<div id="category-slider-container">
+  <div class="category-slider">
+    <div class="slider-wrapper">
+      <div class="my-slider">
+        <div class="slide-item active" data-category="all">All</div>
+        <div class="slide-item" data-category="vegan">Vegan</div>
+        <div class="slide-item" data-category="gluten-free">Gluten Free</div>
+        <!-- Agregá más categorías si las necesitas -->
+      </div>
+    </div>
+  </div>
+</div>
 
-<body>
-    <app-header></app-header>
-
-    <h1 data-i18n="full-menu.title"></h1>
-    <language-selector></language-selector>
-
-    <div id="category-slider-container"></div>
-
-    <main id="full-menu-container" class="menu-sections">
-        <!-- Secciones y productos se renderizan dinámicamente -->
-    </main>
-
-    <app-footer></app-footer>
-
-    <script type="module" src="../../../assets/i18n/translationService.js"></script>
-
-    <script type="module" src="../../category-slider/category-slider.js"></script>
-
-    <!-- Tiny Slider JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
-
-    <script type="module">
-        import TranslationService from '../../assets/i18n/translationService.js';
-
-        // Cargar el idioma al cargar la página
-        await TranslationService.loadTranslations();
-        TranslationService.translatePage();
-
-        // Escuchar cambios de idioma (si otros componentes los disparan)
-        document.addEventListener('translationsReady', () => {
-            TranslationService.translatePage();
-        });
-    </script>
-
-</body>
-
-</html>
+<main id="full-menu-container" class="menu-sections">
+  <!-- Secciones y productos se renderizan dinámicamente -->
+</main>
