@@ -8,6 +8,7 @@ class LanguageSelector extends HTMLElement {
     this.languages = {
       en: "English",
       es: "Español",
+      pt: "Portugues"
     };
 
     // Obtener la ruta base para los recursos

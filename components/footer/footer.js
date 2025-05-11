@@ -1,5 +1,15 @@
 import { storeConfig } from "../../config/config.js";
 
+function ensureFontAwesomeLoaded() {
+  const existing = document.querySelector('link[href*="font-awesome"]');
+  if (!existing) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    document.head.appendChild(link);
+  }
+}
+
 class AppFooter extends HTMLElement {
   constructor() {
     super();
@@ -7,6 +17,9 @@ class AppFooter extends HTMLElement {
   }
 
   async connectedCallback() {
+
+    ensureFontAwesomeLoaded();
+
     const [html, css] = await Promise.all([
       fetch(new URL("./footer.html", import.meta.url)).then((res) =>
         res.text()

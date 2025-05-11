@@ -19,7 +19,3 @@
 .home-btn:hover {
     text-decoration: underline;
 }
-
-.navbar-right language-selector {
-    display: inline-block;
-}

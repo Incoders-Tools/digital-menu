@@ -23,7 +23,9 @@ export const storeConfig = {
             }
         },
         header: {
-            appearance: "navbar"
+            appearance: "navbar" // utiliza navbar con navegacion a home y langua selector
+            //appearance: "cover" utiliza portada con imagen header.svg - header.jpg - header.png
+            //appearance: "" usa default
         }
     },
     
