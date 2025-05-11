@@ -1,3 +1,4 @@
+import { storeConfig } from "../../../config/config.js";
 import "../../../components/category-slider/category-slider.js";
 
 class StartersService extends HTMLElement {
@@ -34,7 +35,7 @@ class StartersService extends HTMLElement {
   }
 
   async loadProducts() {
-    const res = await fetch("../../../data/products.json");
+    const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
     this.products = (data.products || []).filter(
       (p) => p.service === "primary"

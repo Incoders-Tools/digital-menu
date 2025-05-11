@@ -1,3 +1,4 @@
+import { storeConfig } from "../../../config/config.js";
 import "../../../components/category-slider/category-slider.js";
 
 class FullService extends HTMLElement {
@@ -34,7 +35,7 @@ class FullService extends HTMLElement {
   }
 
   async loadProducts() {
-    const res = await fetch("../../../data/products.json");
+    const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
     this.products = data.products || [];
   }

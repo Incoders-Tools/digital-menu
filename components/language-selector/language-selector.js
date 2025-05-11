@@ -36,9 +36,7 @@ class LanguageSelector extends HTMLElement {
   }
 
   _getBasePath() {
-    // Esta función determina la ruta base del componente para cargar recursos
-    const baseUrl = new URL(window.location.href);
-    return `${baseUrl.origin}/components/language-selector/`;
+    return `${storeConfig.site.url}/components/language-selector/`;
   }
 
   _loadResources() {
