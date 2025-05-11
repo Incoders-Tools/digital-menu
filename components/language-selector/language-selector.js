@@ -1,3 +1,4 @@
+import { storeConfig } from "../../../config/config.js";
 import TranslationService from "../../assets/i18n/translationService.js";
 
 class LanguageSelector extends HTMLElement {
