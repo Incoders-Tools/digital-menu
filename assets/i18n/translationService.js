@@ -1,10 +1,12 @@
+import { storeConfig } from "../../config/config.js";
+
 const TranslationService = (() => {
   let currentLang = localStorage.getItem("selectedLanguage") || "en";
   let translations = {};
 
   const loadTranslations = async (lang = currentLang) => {
     try {
-      const res = await fetch(`/assets/i18n/${lang}.json`);
+      const res = await fetch(`${storeConfig.site.url}/assets/i18n/${lang}.json`);
       translations = await res.json();
       currentLang = lang;
       localStorage.setItem("selectedLanguage", lang);
