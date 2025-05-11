@@ -21,10 +21,22 @@ const TranslationService = (() => {
   const t = (key) => translations[key] || key;
 
   const translatePage = () => {
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
+    translateElementTree(document);
+  };
+
+  const translateElementTree = (root) => {
+    if (!root) return;
+    root.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (translations[key]) {
         el.textContent = translations[key];
+      }
+    });
+
+    // Repetir para los shadow roots de los custom elements
+    root.querySelectorAll("*").forEach((el) => {
+      if (el.shadowRoot) {
+        translateElementTree(el.shadowRoot);
       }
     });
   };

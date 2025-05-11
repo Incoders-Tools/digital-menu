@@ -4,6 +4,7 @@ import "./components/footer/footer.js";
 import "./components/service-menu/service-menu.js";
 import "./components/language-selector/language-selector.js";
 import "./components/service-menu/full-service/full-service.js";
+import "./components/service-menu/starters-service/starters-service.js";
 
 console.log("Entorno activo:", storeConfig.site.url);
 
