@@ -1,27 +1,14 @@
-class ServiceMenu extends HTMLElement {
-  connectedCallback() {
-    const fullServiceIcon = new URL('./full-service/full-service.png', import.meta.url);
-    const drinksIcon = new URL('./drinks-service/drink-service.png', import.meta.url);
-    const mainCoursesIcon = 'https://cdn-icons-png.flaticon.com/512/3595/3595455.png';
-    const startersIcon = 'https://cdn-icons-png.flaticon.com/512/706/706195.png';
-    const dessertsIcon = 'https://cdn-icons-png.flaticon.com/512/3514/3514243.png';
-    
-
-    const style = document.createElement("style");
-    style.textContent = `
 .all {
-  position: relative;
-  width: 90vw;
-  max-width: 500px;
-  height: 90vw;
-  max-height: 500px;
-  margin: 5vh auto;
-  perspective: 1000px;
-}
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    perspective: 1000px;
+  }
 
   .starters, .main-courses, .drinks, .desserts {
-    width: 40%;
-    height: 25%;
+    width: 200px;
+    height: 150px;
     transform-style: preserve-3d;
     border-radius: 10px;
     border: 1px solid #fff;
@@ -55,9 +42,9 @@ class ServiceMenu extends HTMLElement {
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
-    background-image: url(${fullServiceIcon});
-    width: 40%;
-    height: 25%;
+    background-image: url(https://cdn3.iconfinder.com/data/icons/other-icons/48/app_window-512.png);
+    width: 200px;
+    height: 150px;
     border-radius: 10px;
     border: 1px solid #fff;
     background-position: center;
@@ -113,74 +100,26 @@ class ServiceMenu extends HTMLElement {
     bottom: -1%;
     left: 50%;
     transform: translate(-50%, 0) translateZ(-50px) rotateX(10deg);
-    background-image: url(${startersIcon});
+    background-image: url(https://cdn3.iconfinder.com/data/icons/other-icons/48/organization-512.png);
   }
 
   .main-courses {
     top: 50%;
     left: -15%;
     transform: translate(0, -50%) translateZ(-25px) rotateY(-5deg);
-    background-image: url(${mainCoursesIcon});
+    background-image: url(https://cdn3.iconfinder.com/data/icons/other-icons/48/creative_draw-512.png);
   }
 
   .drinks {
     top: 50%;
     right: -15%;
     transform: translate(0, -50%) translateZ(-25px) rotateY(5deg);
-    background-image: url(${drinksIcon});
+    background-image: url(https://cdn3.iconfinder.com/icons/11053097/drink_soda_soft_food_and_drinks_bottle_icon);
   }
 
   .desserts {
     top: -1%;
     left: 50%;
     transform: translate(-50%, 0) translateZ(-50px) rotateX(-10deg);
-    background-image: url(${dessertsIcon});
+    background-image: url(https://cdn3.iconfinder.com/data/icons/other-icons/48/search-512.png);
   }
-
-  @media screen and (max-width: 600px) {
-  .text {
-    font-size: 0.8rem;
-  }
-
-  .explainer {
-    font-size: 1.2rem;
-    padding: 0.5rem;
-  }
-
-  .full-service, .starters, .main-courses, .drinks, .desserts {
-    width: 40%;
-  height: 25%;
-    box-shadow: 0 0 10px 3px rgba(100, 100, 255, .2);
-  }
-`;
-
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(style);
-
-    this.shadowRoot.innerHTML += `
-    <div class="all">
-      <div class="full-service">
-        <div class="explainer"><span data-i18n="menu.explore_menu" onclick="loadPage('full-service')">Explore Menu</span></div>
-        <div class="text" data-i18n="menu.full_menu">Full Menu</div>
-      </div>
-      <div class="desserts" onclick="loadPage('desserts-service')">
-        <div class="text" data-i18n="menu.desserts">Desserts</div>
-      </div>
-      <div class="drinks" onclick="loadPage('drinks-service')">
-        <div class="text" data-i18n="menu.drinks">Drinks</div>
-      </div>
-      <div class="main-courses" onclick="loadPage('main-courses-service')">
-        <div class="text" data-i18n="menu.main_courses">Main Courses</div>
-      </div>
-      <div class="starters" onclick="loadPage('starters-service')">
-        <div class="text" data-i18n="menu.starters">Starters</div>
-      </div>
-    </div>
-  `;
-
-  this.shadowRoot.appendChild(linkElem);
-  this.shadowRoot.appendChild(container);
-  }
-}
-
-customElements.define("service-menu", ServiceMenu);
