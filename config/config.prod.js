@@ -33,17 +33,32 @@ export const storeConfig = {
         placeholder: "Buscar platos..."
     },
     
-    // Footer configuration
-    footer: {
-        title: "#ShortName - #Slogan",
-        description: "#Footer subtitle or description",
-        socialLinks: [
-            { platform: "facebook", url: "#" },
-            { platform: "instagram", url: "#" },
-            { platform: "whatsapp", url: "#" }
-        ],
-        copyright: "2025 Incoders - Software Techonolgies. All rights reserved.",
-    }
+  // Footer configuration
+  footer: {
+    title: {
+      es: "NombreCorto - Eslogan",
+      en: "ShortName - Slogan",
+      fr: "NomCourt - Slogan",
+      pt: "NomeCurto - Slogan",
+    },
+    description: {
+      es: "Subtítulo o descripción del pie de página",
+      en: "Footer subtitle or description",
+      fr: "Sous-titre ou description du pied de page",
+      pt: "Legenda ou descrição do rodapé",
+    },
+    copyright: {
+      es: "© 2025 Incoders - Todos los derechos reservados.",
+      en: "© 2025 Incoders - All rights reserved.",
+      fr: "© 2025 Incoders - Tous droits réservés.",
+      pt: "© 2025 Incoders - Todos os direitos reservados.",
+    },
+    socialLinks: [
+      { platform: "facebook", url: "#" },
+      { platform: "instagram", url: "#" },
+      { platform: "whatsapp", url: "#" },
+    ],
+  },
 };
 
 export const apiConfig = {
