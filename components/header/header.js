@@ -1,4 +1,5 @@
 import { storeConfig } from "../../config/config.js";
+import TranslationService from "../../assets/i18n/translationService.js";
 
 class AppHeader extends HTMLElement {
   constructor() {
@@ -25,6 +26,12 @@ class AppHeader extends HTMLElement {
     `;
 
     this.initContent(appearance);
+
+    // Traducir su shadowRoot (por si ya está lista la traducción)
+    TranslationService.translatePage(this.shadowRoot);
+
+    // Informar que ya está listo
+    this.dispatchEvent(new CustomEvent("componentReady", { bubbles: true }));
   }
 
   initContent(appearance) {
@@ -33,12 +40,16 @@ class AppHeader extends HTMLElement {
     if (appearance === "navbar") {
       const homeBtn = this.shadowRoot.getElementById("home-btn");
       if (homeBtn) {
-        homeBtn.addEventListener("click", () => {
-          window.location.href = site.url;
+        homeBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (typeof window.loadPage === "function") {
+            window.loadPage("service-menu");
+          } else {
+            window.location.href = site.url;
+          }
         });
       }
     } else {
-      // Comportamiento normal (cover, empty, etc.)
       this.shadowRoot.getElementById("header-title").textContent =
         site.shortName;
       this.shadowRoot.getElementById("header-subtitle").textContent =

@@ -69,6 +69,11 @@
     inset: 0;
     z-index: 2;
     transition: opacity 0.3s ease;
+    text-align: center;
+    padding: 1rem;
+    line-height: 1.4;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .all.menu-expanded .explainer {
