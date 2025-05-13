@@ -5,7 +5,8 @@ function ensureFontAwesomeLoaded() {
   if (!existing) {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+    link.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
     document.head.appendChild(link);
   }
 }
@@ -36,7 +37,10 @@ class AppFooter extends HTMLElement {
 
     this.setContent();
 
-    document.addEventListener("translationsReady", this.setContentBound = this.setContent.bind(this));
+    document.addEventListener(
+      "translationsReady",
+      (this.setContentBound = this.setContent.bind(this))
+    );
   }
 
   disconnectedCallback() {
@@ -45,14 +49,18 @@ class AppFooter extends HTMLElement {
 
   setContent() {
     const root = this.shadowRoot;
-    const lang = document.documentElement.lang || "es";
+    const lang = event?.detail?.lang || localStorage.getItem("selectedLanguage") || "es";
+    document.addEventListener("translationsReady", this.setContentBound = this.setContent.bind(this));
 
     root.getElementById("footer-title").textContent =
       storeConfig.footer.title[lang];
     root.getElementById("footer-description").textContent =
       storeConfig.footer.description[lang];
-    
+    root.getElementById("copyright").textContent =
+      storeConfig.footer.copyright[lang];
+
     const socialLinksContainer = root.getElementById("social-links-container");
+    socialLinksContainer.innerHTML = "";
     storeConfig.footer.socialLinks.forEach((link) => {
       const a = document.createElement("a");
       a.href = link.url;
@@ -61,9 +69,6 @@ class AppFooter extends HTMLElement {
       a.appendChild(i);
       socialLinksContainer.appendChild(a);
     });
-
-    root.getElementById("copyright").textContent =
-      storeConfig.footer.copyright[lang];
   }
 }
 
