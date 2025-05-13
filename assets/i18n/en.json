@@ -1,9 +1,10 @@
 {
-    "menu.starters": "Starters",
-    "menu.main_courses": "Main Courses",
-    "menu.drinks": "Drinks",
-    "menu.desserts": "Desserts",
-    "menu.full_menu": "Full Menu",
-    "full-menu.title": "Full Menu",
-    "navbar.home-btn": "Home"
+    "service-menu.explore_menu": "Explore Menu",
+    "service-menu.starters": "Starters",
+    "service-menu.main_courses": "Main Courses",
+    "service-menu.drinks": "Drinks",
+    "service-menu.desserts": "Desserts",
+    "service-menu.full_service": "Full Menu",
+    "service-menu.full-service.title": "Full Menu",
+    "header.navbar.home-btn": "Home"
 }  

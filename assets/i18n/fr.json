@@ -1,9 +1,10 @@
 {
-    "menu.starters": "Entrées",
-    "menu.main_courses": "Plats Principaux",
-    "menu.drinks": "Boissons",
-    "menu.desserts": "Desserts",
-    "menu.full_menu": "#FR_MENU_FULL_MENU",
-    "full-menu.title": "#STARTERS_TITLE"
+    "service-menu.explore_menu": "Explorer le menu",
+    "service-menu.starters": "Entrées",
+    "service-menu.main_courses": "Plats principaux",
+    "service-menu.drinks": "Boissons",
+    "service-menu.desserts": "Desserts",
+    "service-menu.full_service": "Menu complet",
+    "service-menu.full-service.title": "Menu complet",
+    "header.navbar.home-btn": "Accueil"
 }
-  

@@ -46,20 +46,6 @@ class ServiceMenu extends HTMLElement {
   setupEventListeners() {
     const container = this.shadowRoot.querySelector('.all');
     const fullService = this.shadowRoot.querySelector('.full-service');
-    const explainer = fullService.querySelector('.explainer');
-    const fullServiceText = fullService.querySelector('.text');
-
-    fullService.addEventListener('mouseenter', () => {
-      if (!this.isMobile) {
-        fullServiceText.textContent = this.getTranslation('menu.full_menu');
-      }
-    });
-
-    fullService.addEventListener('mouseleave', () => {
-      if (!this.isMobile) {
-        fullServiceText.textContent = this.getTranslation('menu.explore_menu');
-      }
-    });
 
     fullService.addEventListener('click', (e) => {
       if (this.isMobile) {
@@ -67,7 +53,6 @@ class ServiceMenu extends HTMLElement {
           container.classList.add('menu-expanded');
           this.menuExpanded = true;
           e.preventDefault();
-          fullServiceText.textContent = this.getTranslation('menu.full_menu');
         } else {
           container.classList.remove('menu-expanded');
           this.menuExpanded = false;
@@ -103,9 +88,6 @@ class ServiceMenu extends HTMLElement {
       const container = this.shadowRoot.querySelector('.all');
       container.classList.remove('menu-expanded');
       this.menuExpanded = false;
-
-      const fullServiceText = this.shadowRoot.querySelector('.full-service .text');
-      fullServiceText.textContent = this.getTranslation('menu.explore_menu');
     }
   }
 
@@ -118,11 +100,6 @@ class ServiceMenu extends HTMLElement {
       container.classList.remove('menu-expanded');
       this.menuExpanded = false;
     }
-  }
-
-  getTranslation(key) {
-    const el = this.shadowRoot.querySelector(`[data-i18n="${key}"]`);
-    return el?.textContent || '';
   }
 
   navigateTo(page) {

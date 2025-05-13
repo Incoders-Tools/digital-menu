@@ -15,20 +15,20 @@
 .main-courses,
 .drinks,
 .desserts {
-  border-radius: 10px;
-  border: 1px solid #fff;
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: #58d;
-  background-blend-mode: color-burn;
-  cursor: pointer;
-  box-shadow: 0 0 20px 5px rgba(100, 100, 255, .3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  transition: box-shadow 0.3s ease-in-out, transform 0.5s ease-in-out;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #58d;
+    background-blend-mode: color-burn;
+    cursor: pointer;
+    box-shadow: 0 0 20px 5px rgba(100, 100, 255, .3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .full-service:hover {
@@ -40,6 +40,18 @@
     font-weight: bold;
     font-size: 1.2rem;
     text-align: center;
+    z-index: 1;
+    position: relative;
+    padding: 0 0.5rem;
+}
+
+.full-service .text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.all.menu-expanded .full-service .text {
+    opacity: 1;
 }
 
 .explainer {
@@ -53,8 +65,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+.all.menu-expanded .explainer {
+    opacity: 0;
+    pointer-events: none;
 }
 
 @media screen and (max-width: 600px) {
@@ -103,10 +122,10 @@
 .main-courses,
 .drinks,
 .desserts {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.8);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 /* Mostrar al expandir */
@@ -114,19 +133,29 @@
 .all.menu-expanded .main-courses,
 .all.menu-expanded .drinks,
 .all.menu-expanded .desserts {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
 }
 
 /* Desktop hover activa expansión */
 @media (min-width: 601px) {
-  .all:hover .starters,
-  .all:hover .main-courses,
-  .all:hover .drinks,
-  .all:hover .desserts {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-  }
+
+    .all:hover .starters,
+    .all:hover .main-courses,
+    .all:hover .drinks,
+    .all:hover .desserts {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
+
+    .all:hover .explainer {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .all:hover .full-service .text {
+        opacity: 1;
+    }
 }

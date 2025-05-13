@@ -1,8 +1,10 @@
 {
-    "menu.starters": "Entradas",
-    "menu.main_courses": "Pratos Principais",
-    "menu.drinks": "Bebidas",
-    "menu.desserts": "Sobremesas",
-    "menu.full_menu": "#PT_MENU_FULL_MENU",
-    "full-menu.title": "#STARTERS_TITLE"
-}  
+    "service-menu.explore_menu": "Explorar o cardápio",
+    "service-menu.starters": "Entradas",
+    "service-menu.main_courses": "Pratos principais",
+    "service-menu.drinks": "Bebidas",
+    "service-menu.desserts": "Sobremesas",
+    "service-menu.full_service": "Cardápio completo",
+    "service-menu.full-service.title": "Cardápio completo",
+    "header.navbar.home-btn": "Início"
+}
