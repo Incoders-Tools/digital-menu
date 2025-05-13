@@ -3,9 +3,9 @@ import { storeConfig } from "../../config/config.js";
 function ensureFontAwesomeLoaded() {
   const existing = document.querySelector('link[href*="font-awesome"]');
   if (!existing) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
     document.head.appendChild(link);
   }
 }
@@ -17,7 +17,6 @@ class AppFooter extends HTMLElement {
   }
 
   async connectedCallback() {
-
     ensureFontAwesomeLoaded();
 
     const [html, css] = await Promise.all([
@@ -36,13 +35,23 @@ class AppFooter extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.setContent();
+
+    document.addEventListener("translationsReady", this.setContentBound = this.setContent.bind(this));
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener("translationsReady", this.setContentBound);
   }
 
   setContent() {
     const root = this.shadowRoot;
-    root.getElementById("footer-title").textContent = storeConfig.footer.title;
-    root.getElementById("footer-description").textContent = storeConfig.footer.description;
+    const lang = document.documentElement.lang || "es";
 
+    root.getElementById("footer-title").textContent =
+      storeConfig.footer.title[lang];
+    root.getElementById("footer-description").textContent =
+      storeConfig.footer.description[lang];
+    
     const socialLinksContainer = root.getElementById("social-links-container");
     storeConfig.footer.socialLinks.forEach((link) => {
       const a = document.createElement("a");
@@ -53,7 +62,8 @@ class AppFooter extends HTMLElement {
       socialLinksContainer.appendChild(a);
     });
 
-    root.getElementById("copyright").textContent = `© ${storeConfig.footer.copyright}`;
+    root.getElementById("copyright").textContent =
+      storeConfig.footer.copyright[lang];
   }
 }
 
