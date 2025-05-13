@@ -119,14 +119,6 @@ h1 {
     color: #666;
 }
 
-/* Contenedor de productos */
-#products-container {
-    position: relative;
-    /* Asegura que los elementos dentro del contenedor se posicionen respecto a él */
-    min-height: 200px;
-    /* Ajusta según lo que necesites, para darle algo de altura */
-}
-
 /* Loader Overlay */
 .loader-overlay {
     position: fixed;
