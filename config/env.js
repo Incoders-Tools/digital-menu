@@ -1,2 +1,2 @@
 // config/env.js
-export const ENV = 'local'; // 'prod' 'dev', 'local', etc.
+export const ENV = 'prod'; // 'prod' 'dev', 'local', etc.
