@@ -5,6 +5,7 @@ import "./components/service-menu/service-menu.js";
 import "./components/language-selector/language-selector.js";
 import "./components/service-menu/full-service/full-service.js";
 import "./components/service-menu/starters-service/starters-service.js";
+import "./components/service-menu/drinks-service/drinks-service.js";
 
 console.log("Entorno activo:", storeConfig.site.url);
 

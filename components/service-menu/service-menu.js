@@ -4,7 +4,7 @@ Promise.all([
   fetch(new URL('./service-menu.html', import.meta.url)).then(r => r.text()),
   fetch(new URL('./service-menu.css', import.meta.url)).then(r => r.text()),
   new URL('./full-service/full-service.png', import.meta.url),
-  new URL('./drinks-service/drink-service.png', import.meta.url)
+  new URL('./drinks-service/drinks-service.png', import.meta.url)
 ]).then(([html, css, fullServiceIcon, drinksIcon]) => {
   const startersIcon = 'https://cdn-icons-png.flaticon.com/512/706/706195.png';
   const dessertsIcon = 'https://cdn-icons-png.flaticon.com/512/3514/3514243.png';
