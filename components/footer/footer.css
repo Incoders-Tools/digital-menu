@@ -10,14 +10,25 @@ footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 2rem;
+    padding: 1.5rem 1rem;
+    /* antes: 2rem, reducido */
+    gap: 0.5rem;
+    /* agregamos para espaciamiento uniforme y compacto */
+}
+
+.footer-content h3,
+.footer-content p {
+    margin: 0.25rem 0;
+    /* reducimos espacio vertical */
 }
 
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
+    gap: 0.75rem;
+    /* un poco más compacto entre íconos */
+    margin: 0.5rem 0;
+    /* antes: 1rem 0 */
 }
 
 .social-links a {
