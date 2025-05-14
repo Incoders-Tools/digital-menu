@@ -1,9 +1,15 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
 .service-title {
     text-align: center;
 }
 
 .menu-sections {
     padding: 2rem;
+    min-height: 600px;
 }
 
 .section-title {
@@ -47,4 +53,11 @@
 .product-price-size {
     font-weight: bold;
     margin-top: 0.5rem;
+}
+
+.no-products-message {
+    font-size: 1.1rem;
+    color: #777;
+    text-align: center;
+    padding: 2rem 1rem;
 }

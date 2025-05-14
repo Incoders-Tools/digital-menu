@@ -1,7 +1,7 @@
 import { storeConfig } from "../../../config/config.js";
 import "../../../components/category-slider/category-slider.js";
 
-class StartersService extends HTMLElement {
+class MainService extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -11,10 +11,10 @@ class StartersService extends HTMLElement {
   async connectedCallback() {
     const [html, css] = await Promise.all([
       fetch(
-        import.meta.url.replace("starters-service.js", "starters-service.html")
+        import.meta.url.replace("main-service.js", "main-service.html")
       ).then((res) => res.text()),
       fetch(
-        import.meta.url.replace("starters-service.js", "starters-service.css")
+        import.meta.url.replace("main-service.js", "main-service.css")
       ).then((res) => res.text()),
     ]);
 
@@ -27,23 +27,23 @@ class StartersService extends HTMLElement {
     this.shadowRoot
       .querySelector("category-slider")
       ?.addEventListener("categorySelected", (e) => {
-        this.renderStarters(e.detail.category);
+        this.renderMainCourses(e.detail.category);
       });
 
     await this.loadProducts();
-    this.renderStarters();
+    this.renderMainCourses();
   }
 
   async loadProducts() {
     const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
     this.products = (data.products || []).filter(
-      (p) => p.service === "primary"
+      (p) => p.service === "principal"
     );
   }
 
-  renderStarters(filteredCategory = "all") {
-    const container = this.shadowRoot.querySelector("#starters-container");
+  renderMainCourses(filteredCategory = "all") {
+    const container = this.shadowRoot.querySelector("#main-courses-container");
     if (!container) return;
 
     container.innerHTML = "";
@@ -63,7 +63,7 @@ class StartersService extends HTMLElement {
     }
 
     const section = document.createElement("section");
-    section.innerHTML = `<h2 class="section-title">Entradas</h2>`;
+    section.innerHTML = `<h2 class="section-title">Platos Principales</h2>`;
 
     filtered.forEach((p) => {
       const card = document.createElement("div");
@@ -91,4 +91,4 @@ class StartersService extends HTMLElement {
   }
 }
 
-customElements.define("starters-service", StartersService);
+customElements.define("main-service", MainService);

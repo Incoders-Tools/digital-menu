@@ -65,7 +65,7 @@ class ServiceMenu extends HTMLElement {
 
     const menuItems = [
       { selector: '.starters', page: 'starters-service' },
-      { selector: '.main-courses', page: 'main-courses-service' },
+      { selector: '.main-courses', page: 'main-service' },
       { selector: '.drinks', page: 'drinks-service' },
       { selector: '.desserts', page: 'desserts-service' },
     ];

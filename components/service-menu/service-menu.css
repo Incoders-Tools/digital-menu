@@ -97,14 +97,20 @@
 }
 
 /* Posiciones grid */
-.desserts {
+
+.starters {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.main-courses {
     grid-column: 2;
     grid-row: 1;
 }
 
-.main-courses {
-    grid-column: 1;
-    grid-row: 2;
+.desserts {
+    grid-column: 2;
+    grid-row: 3;
 }
 
 .full-service {
@@ -115,11 +121,6 @@
 .drinks {
     grid-column: 3;
     grid-row: 2;
-}
-
-.starters {
-    grid-column: 2;
-    grid-row: 3;
 }
 
 /* Inicialmente ocultar los otros menús */

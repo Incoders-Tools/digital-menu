@@ -37,9 +37,7 @@ class DrinksService extends HTMLElement {
   async loadProducts() {
     const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
-    this.products = (data.products || []).filter(
-      (p) => p.service === "drink"
-    );
+    this.products = (data.products || []).filter((p) => p.service === "drink");
   }
 
   renderDrinks(filteredCategory = "all") {
@@ -55,14 +53,17 @@ class DrinksService extends HTMLElement {
     }
 
     if (!filtered.length) {
-      container.innerHTML = "<p>No hay bebidas disponibles para esta categoría.</p>";
+      const message = document.createElement("p");
+      message.className = "no-products-message";
+      message.textContent = "No hay productos disponibles en esta categoría.";
+      container.appendChild(message);
       return;
     }
 
     // Agrupar por subcategoría (si existe)
     const groupedProducts = {};
-    filtered.forEach(p => {
-      const subcat = p.subcategory || 'Otras Bebidas';
+    filtered.forEach((p) => {
+      const subcat = p.subcategory || "Otras Bebidas";
       if (!groupedProducts[subcat]) {
         groupedProducts[subcat] = [];
       }
@@ -73,13 +74,13 @@ class DrinksService extends HTMLElement {
     section.innerHTML = `<h2 class="section-title">Bebidas</h2>`;
 
     // Renderizar por grupos
-    Object.keys(groupedProducts).forEach(subcatName => {
+    Object.keys(groupedProducts).forEach((subcatName) => {
       const subcatProducts = groupedProducts[subcatName];
-      
+
       // Solo añadir título de subcategoría si hay más de una
       if (Object.keys(groupedProducts).length > 1) {
-        const subcatHeader = document.createElement('h3');
-        subcatHeader.className = 'subsection-title';
+        const subcatHeader = document.createElement("h3");
+        subcatHeader.className = "subsection-title";
         subcatHeader.textContent = subcatName;
         section.appendChild(subcatHeader);
       }
@@ -95,11 +96,7 @@ class DrinksService extends HTMLElement {
               ? `<div class="product-description">${p.description}</div>`
               : ""
           }
-          ${
-            p.type
-              ? `<div class="beverage-type">Tipo: ${p.type}</div>`
-              : ""
-          }
+          ${p.type ? `<div class="beverage-type">Tipo: ${p.type}</div>` : ""}
           ${
             p.ingredients
               ? `<div class="product-ingredients">Ingredientes: ${p.ingredients}</div>`
