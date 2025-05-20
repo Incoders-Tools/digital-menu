@@ -27,6 +27,11 @@ export const storeConfig = {
     },
   },
 
+  // Defaults
+  default: {
+    language : "es"
+  },
+
   // Search and filter configuration
   search: {
     placeholder: "Buscar platos...",

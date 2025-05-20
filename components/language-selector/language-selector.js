@@ -27,7 +27,7 @@ class LanguageSelector extends HTMLElement {
     this._loadResources();
 
     // Establecer idioma actual (desde localStorage o por defecto)
-    this.currentLang = localStorage.getItem("selectedLanguage") || "en";
+    this.currentLang = localStorage.getItem("selectedLanguage") || storeConfig.default.language;
 
     // Configurar los event listeners después de que el contenido se haya cargado
     setTimeout(() => {

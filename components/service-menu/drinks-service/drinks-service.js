@@ -23,21 +23,49 @@ class DrinksService extends HTMLElement {
     this.shadowRoot.innerHTML = html;
     this.shadowRoot.prepend(style);
 
-    // Escuchar evento del slider
-    this.shadowRoot
-      .querySelector("category-slider")
-      ?.addEventListener("categorySelected", (e) => {
-        this.renderDrinks(e.detail.category);
-      });
-
+    // Cargar productos y categorías
     await this.loadProducts();
-    this.renderDrinks();
+
+    // Inyectar categorías al slider
+    const categories = this.extractCategories();
+    const slider = this.shadowRoot.querySelector("category-slider");
+    if (slider) {
+      slider.setCategories(categories); // usamos un método del slider
+    }
+
+    console.log(this.products);
+    console.log(categories);
+    // Escuchar evento del slider
+    slider?.addEventListener("categorySelected", (e) => {
+      this.renderDrinks(e.detail.category);
+    });
+
+    this.renderDrinks(); // Render por defecto "all"
   }
 
   async loadProducts() {
     const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
     this.products = (data.products || []).filter((p) => p.service === "drink");
+  }
+
+  extractCategories() {
+    const categoryMap = new Map();
+
+    this.products.forEach((p) => {
+      if (p.category && p.categoryDescription) {
+        categoryMap.set(p.category, p.categoryDescription);
+      }
+    });
+
+    // Convertimos a array incluyendo "all"
+    return [
+      { value: "all", label: "Todas" }, // O puedes poner "All", "Tous", etc. más tarde traducible
+      ...Array.from(categoryMap.entries()).map(([value, label]) => ({
+        value,
+        label,
+      })),
+    ];
   }
 
   renderDrinks(filteredCategory = "all") {
@@ -73,11 +101,9 @@ class DrinksService extends HTMLElement {
     const section = document.createElement("section");
     section.innerHTML = `<h2 class="section-title">Bebidas</h2>`;
 
-    // Renderizar por grupos
     Object.keys(groupedProducts).forEach((subcatName) => {
       const subcatProducts = groupedProducts[subcatName];
 
-      // Solo añadir título de subcategoría si hay más de una
       if (Object.keys(groupedProducts).length > 1) {
         const subcatHeader = document.createElement("h3");
         subcatHeader.className = "subsection-title";
@@ -85,7 +111,6 @@ class DrinksService extends HTMLElement {
         section.appendChild(subcatHeader);
       }
 
-      // Añadir productos
       subcatProducts.forEach((p) => {
         const card = document.createElement("div");
         card.className = "product-card";
