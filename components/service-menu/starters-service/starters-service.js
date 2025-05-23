@@ -23,6 +23,8 @@ class StartersService extends HTMLElement {
     this.shadowRoot.innerHTML = html;
     this.shadowRoot.prepend(style);
 
+    await this.loadProducts();
+
     // Escuchar evento del slider
     this.shadowRoot
       .querySelector("category-slider")
@@ -30,7 +32,13 @@ class StartersService extends HTMLElement {
         this.renderStarters(e.detail.category);
       });
 
-    await this.loadProducts();
+    // Inyectar categorías al slider
+    const categories = this.extractCategories();
+    const slider = this.shadowRoot.querySelector("category-slider");
+    if (slider) {
+      slider.setCategories(categories); // usamos un método del slider
+    }
+
     this.renderStarters();
   }
 
@@ -38,8 +46,27 @@ class StartersService extends HTMLElement {
     const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
     this.products = (data.products || []).filter(
-      (p) => p.service === "primary"
+      (p) => p.service === "starter"
     );
+  }
+
+  extractCategories() {
+    const categoryMap = new Map();
+
+    this.products.forEach((p) => {
+      if (p.category && p.categoryDescription) {
+        categoryMap.set(p.category, p.categoryDescription);
+      }
+    });
+
+    // Convertimos a array incluyendo "all"
+    return [
+      { value: "all", label: "Todas" }, // O puedes poner "All", "Tous", etc. más tarde traducible
+      ...Array.from(categoryMap.entries()).map(([value, label]) => ({
+        value,
+        label,
+      })),
+    ];
   }
 
   renderStarters(filteredCategory = "all") {

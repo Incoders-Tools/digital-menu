@@ -26,15 +26,20 @@ class DrinksService extends HTMLElement {
     // Cargar productos y categorías
     await this.loadProducts();
 
+    const slider = this.shadowRoot.querySelector("category-slider");
+
+    if (slider) {
+      slider.addEventListener("sliderReady", () => {
+        slider.setCategories(categories);
+      });
+    }
+
     // Inyectar categorías al slider
     const categories = this.extractCategories();
-    const slider = this.shadowRoot.querySelector("category-slider");
     if (slider) {
       slider.setCategories(categories); // usamos un método del slider
     }
 
-    console.log(this.products);
-    console.log(categories);
     // Escuchar evento del slider
     slider?.addEventListener("categorySelected", (e) => {
       this.renderDrinks(e.detail.category);

@@ -6,7 +6,7 @@ export const storeConfig = {
     shortName: "#ShortName",
     subtitle: "#SloganOrSubtitle",
     title: "#MenuTitle",
-    url: "http://127.0.0.1:8080",
+    url: "http://127.0.0.1:8080/digital-menu",
     previewImage: "imgs/bergbach-fragrance-preliminar.jpg",
     loader: {
       general: {

@@ -9,7 +9,7 @@ class LanguageSelector extends HTMLElement {
     this.languages = {
       en: "English",
       es: "Español",
-      pt: "Portugues"
+      pt: "Portugues",
     };
 
     // Obtener la ruta base para los recursos
@@ -27,7 +27,8 @@ class LanguageSelector extends HTMLElement {
     this._loadResources();
 
     // Establecer idioma actual (desde localStorage o por defecto)
-    this.currentLang = localStorage.getItem("selectedLanguage") || storeConfig.default.language;
+    this.currentLang =
+      localStorage.getItem("selectedLanguage") || storeConfig.default.language;
 
     // Configurar los event listeners después de que el contenido se haya cargado
     setTimeout(() => {
@@ -41,32 +42,44 @@ class LanguageSelector extends HTMLElement {
   }
 
   _loadResources() {
-    // Cargar estilos desde archivo externo
-    const linkElem = document.createElement("link");
-    linkElem.setAttribute("rel", "stylesheet");
-    linkElem.setAttribute("href", `${this.basePath}language-selector.css`);
-    this.shadowRoot.appendChild(linkElem);
+    // Obtener rutas
+    const cssURL = `${this.basePath}language-selector.css`;
+    const htmlURL = `${this.basePath}language-selector.html`;
 
-    // Cargar el HTML desde el archivo template
-    fetch(`${this.basePath}language-selector.html`)
-      .then((response) => response.text())
+    // Cargar el CSS con fetch y colocarlo como <style>
+    fetch(cssURL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Error cargando CSS: ${res.status}`);
+        return res.text();
+      })
+      .then((cssText) => {
+        const style = document.createElement("style");
+        style.textContent = cssText;
+        this.shadowRoot.appendChild(style);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    // Cargar el HTML
+    fetch(htmlURL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Error cargando HTML: ${res.status}`);
+        return res.text();
+      })
       .then((html) => {
-        // Insertar el HTML en el shadow DOM
         this.shadowRoot.innerHTML += html;
 
-        // Actualizar las rutas de las imágenes de banderas
+        // Actualizar rutas de imágenes de banderas
         this._updateFlagPaths();
 
-        // Configurar los event listeners
+        // Configurar listeners e idioma
         this._setupEventListeners();
-
-        // Actualizar el idioma seleccionado
         this._updateSelectedLanguage(this.currentLang);
       })
       .catch((error) => {
         console.error("Error cargando el template HTML:", error);
-        // Fallback: crear estructura básica si no se puede cargar el HTML
-        this._createBasicStructure();
+        this._createBasicStructure(); // fallback si falla el HTML
       });
   }
 

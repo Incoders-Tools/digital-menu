@@ -2,10 +2,15 @@ export class CategorySlider extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.pendingCategories = null; // Para uso si se llama setCategories() temprano
+    this.pendingCategories = null;
   }
 
   async connectedCallback() {
+    console.log("🟢 connectedCallback de: ");
+
+      if (this.initialized) return;
+      this.initialized = true;
+
     const [html, css] = await Promise.all([
       fetch(
         import.meta.url.replace("category-slider.js", "category-slider.html")
@@ -29,13 +34,6 @@ export class CategorySlider extends HTMLElement {
     // Si ya nos pasaron categorías antes de que cargue todo
     if (this.pendingCategories) {
       this.setCategories(this.pendingCategories);
-    } else {
-      // Categorías por defecto
-      this.setCategories([
-        { value: "all", label: "All" },
-        { value: "vegan", label: "Vegan" },
-        { value: "gluten-free", label: "Gluten Free" },
-      ]);
     }
   }
 
@@ -59,6 +57,12 @@ export class CategorySlider extends HTMLElement {
       this.pendingCategories = categories;
       return;
     }
+
+      if (JSON.stringify(this.lastCategories) === JSON.stringify(categories)) {
+      return;
+    }
+
+    this.lastCategories = categories;
 
     const slider = this.shadowRoot.querySelector(".my-slider");
     slider.innerHTML = ""; // Limpiar

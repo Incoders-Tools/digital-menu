@@ -1,5 +1,4 @@
 import { storeConfig } from "../../../config/config.js";
-import "../../../components/category-slider/category-slider.js";
 
 class FullService extends HTMLElement {
   constructor() {
@@ -25,13 +24,6 @@ class FullService extends HTMLElement {
 
     await this.loadProducts();
     this.renderFullMenu("all");
-
-    // ✅ Escuchamos el evento del slider
-    this.shadowRoot
-      .querySelector("category-slider")
-      ?.addEventListener("categorySelected", (e) => {
-        this.renderFullMenu(e.detail.category);
-      });
   }
 
   async loadProducts() {
@@ -51,11 +43,11 @@ class FullService extends HTMLElement {
         ? this.products
         : this.products.filter((p) => p.category === filteredCategory);
 
-    const servicesOrder = ["primary", "drink", "principal", "dessert"];
+    const servicesOrder = ["starter", "main", "drink", "dessert"];
     const servicesMap = {
-      primary: "Entradas",
+      starter: "Entradas",
       drink: "Bebidas",
-      principal: "Platos Principales",
+      main: "Platos Principales",
       dessert: "Postres",
     };
 
@@ -90,16 +82,6 @@ class FullService extends HTMLElement {
 
       container.appendChild(section);
     });
-  }
-
-  getCategoryName(category) {
-    const categoryNames = {
-      vegan: "Vegano",
-      general: "General",
-      WithAlcohol: "Con Alcohol",
-      WithoutAlcohol: "Sin Alcohol",
-    };
-    return categoryNames[category] || category;
   }
 }
 

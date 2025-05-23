@@ -9,6 +9,8 @@ class MainService extends HTMLElement {
   }
 
   async connectedCallback() {
+    console.log("🧩 main-service conectado", performance.now());
+
     const [html, css] = await Promise.all([
       fetch(
         import.meta.url.replace("main-service.js", "main-service.html")
@@ -23,6 +25,8 @@ class MainService extends HTMLElement {
     this.shadowRoot.innerHTML = html;
     this.shadowRoot.prepend(style);
 
+    await this.loadProducts();
+
     // Escuchar evento del slider
     this.shadowRoot
       .querySelector("category-slider")
@@ -30,16 +34,39 @@ class MainService extends HTMLElement {
         this.renderMainCourses(e.detail.category);
       });
 
-    await this.loadProducts();
+    // Inyectar categorías al slider
+    const categories = this.extractCategories();
+    const slider = this.shadowRoot.querySelector("category-slider");
+    if (slider?.categoriesSet) return;
+      slider.setCategories(categories); // usamos un método del slider
+      slider.categoriesSet = true;
+
     this.renderMainCourses();
   }
 
   async loadProducts() {
     const res = await fetch(`${storeConfig.site.url}/data/products.json`);
     const data = await res.json();
-    this.products = (data.products || []).filter(
-      (p) => p.service === "principal"
-    );
+    this.products = (data.products || []).filter((p) => p.service === "main");
+  }
+
+  extractCategories() {
+    const categoryMap = new Map();
+
+    this.products.forEach((p) => {
+      if (p.category && p.categoryDescription) {
+        categoryMap.set(p.category, p.categoryDescription);
+      }
+    });
+
+    // Convertimos a array incluyendo "all"
+    return [
+      { value: "all", label: "Todas" }, // O puedes poner "All", "Tous", etc. más tarde traducible
+      ...Array.from(categoryMap.entries()).map(([value, label]) => ({
+        value,
+        label,
+      })),
+    ];
   }
 
   renderMainCourses(filteredCategory = "all") {
@@ -49,6 +76,7 @@ class MainService extends HTMLElement {
     container.innerHTML = "";
 
     let filtered = this.products;
+    console.log(filtered);
 
     if (filteredCategory !== "all") {
       filtered = filtered.filter((p) => p.category === filteredCategory);
@@ -88,6 +116,10 @@ class MainService extends HTMLElement {
     });
 
     container.appendChild(section);
+  }
+
+  disconnectedCallback() {
+    console.log("🧹 main-service desconectado");
   }
 }
 
