@@ -23,16 +23,9 @@ class DrinksService extends HTMLElement {
     this.shadowRoot.innerHTML = html;
     this.shadowRoot.prepend(style);
 
-    // Cargar productos y categorías
     await this.loadProducts();
 
     const slider = this.shadowRoot.querySelector("category-slider");
-
-    if (slider) {
-      slider.addEventListener("sliderReady", () => {
-        slider.setCategories(categories);
-      });
-    }
 
     // Inyectar categorías al slider
     const categories = this.extractCategories();

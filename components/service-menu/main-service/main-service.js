@@ -27,19 +27,18 @@ class MainService extends HTMLElement {
 
     await this.loadProducts();
 
-    // Escuchar evento del slider
-    this.shadowRoot
-      .querySelector("category-slider")
-      ?.addEventListener("categorySelected", (e) => {
-        this.renderMainCourses(e.detail.category);
-      });
+    const slider = this.shadowRoot.querySelector("category-slider");
 
     // Inyectar categorías al slider
     const categories = this.extractCategories();
-    const slider = this.shadowRoot.querySelector("category-slider");
-    if (slider?.categoriesSet) return;
+    if (slider) {
       slider.setCategories(categories); // usamos un método del slider
-      slider.categoriesSet = true;
+    }
+
+    // Escuchar evento del slider
+    slider?.addEventListener("categorySelected", (e) => {
+      this.renderMainCourses(e.detail.category);
+    });
 
     this.renderMainCourses();
   }
@@ -76,7 +75,6 @@ class MainService extends HTMLElement {
     container.innerHTML = "";
 
     let filtered = this.products;
-    console.log(filtered);
 
     if (filteredCategory !== "all") {
       filtered = filtered.filter((p) => p.category === filteredCategory);

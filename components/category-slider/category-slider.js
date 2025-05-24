@@ -6,10 +6,8 @@ export class CategorySlider extends HTMLElement {
   }
 
   async connectedCallback() {
-    console.log("🟢 connectedCallback de: ");
-
-      if (this.initialized) return;
-      this.initialized = true;
+    if (this.initialized) return;
+    this.initialized = true;
 
     const [html, css] = await Promise.all([
       fetch(
@@ -52,19 +50,24 @@ export class CategorySlider extends HTMLElement {
   }
 
   setCategories(categories) {
-    if (!this.shadowRoot.querySelector(".my-slider")) {
-      // Todavía no está cargado el DOM → guardar para más tarde
-      this.pendingCategories = categories;
-      return;
-    }
-
-      if (JSON.stringify(this.lastCategories) === JSON.stringify(categories)) {
-      return;
-    }
+    const same =
+      JSON.stringify(this.lastCategories) === JSON.stringify(categories);
+    if (same) return;
 
     this.lastCategories = categories;
 
     const slider = this.shadowRoot.querySelector(".my-slider");
+    if (!slider) {
+      this.pendingCategories = categories;
+      return;
+    }
+
+    // Eliminar cualquier instancia previa antes de modificar DOM
+    if (slider.tnsInstance?.destroy) {
+      slider.tnsInstance.destroy();
+      slider.tnsInstance = null;
+    }
+
     slider.innerHTML = ""; // Limpiar
 
     categories.forEach(({ value, label }, index) => {
@@ -76,17 +79,23 @@ export class CategorySlider extends HTMLElement {
       slider.appendChild(item);
     });
 
-    this.initSlider();
+    // ⏱ Esperar un microtask para que DOM esté actualizado antes de inicializar slider
+    queueMicrotask(() => this.initSlider());
   }
 
   initSlider() {
     const container = this.shadowRoot.querySelector(".my-slider");
     if (!container || !window.tns) return;
 
-    // Destruir slider anterior si existe
-    if (container.tnsInstance) {
+    // Eliminar slider anterior si existe
+    if (container.tnsInstance?.destroy) {
       container.tnsInstance.destroy();
+      container.tnsInstance = null;
     }
+
+    // Eliminar elementos Tiny Slider agregados antes (prevención extra)
+    const oldNavs = this.shadowRoot.querySelectorAll('[class^="tns-"]');
+    oldNavs.forEach((el) => el.remove());
 
     const sliderInstance = window.tns({
       container,
