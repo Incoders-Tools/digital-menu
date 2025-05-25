@@ -19,3 +19,13 @@
 .home-btn:hover {
     text-decoration: underline;
 }
+
+.desktop-only {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+}

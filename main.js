@@ -2,6 +2,7 @@ import { storeConfig } from "./config/config.js";
 import "./components/header/header.js";
 import "./components/footer/footer.js";
 import "./components/service-menu/service-menu.js";
+import "./components/common/back-button/back-button.js";
 import "./components/language-selector/language-selector.js";
 import "./components/service-menu/full-service/full-service.js";
 import "./components/service-menu/starters-service/starters-service.js";

@@ -8,16 +8,17 @@ class AppHeader extends HTMLElement {
   }
 
   async connectedCallback() {
-    const appearance = storeConfig.site.header.appearance || "Cover";
+    const appearance = storeConfig.site.header.appearance || "navbar";
     const appearanceFile = appearance.toLowerCase(); // "cover", "navbar", etc.
+    const appearanceFolder = appearance.toLowerCase();
 
     const [html, css] = await Promise.all([
-      fetch(new URL(`./${appearanceFile}.html`, import.meta.url)).then((res) =>
-        res.text()
-      ),
-      fetch(new URL(`./${appearanceFile}.css`, import.meta.url)).then((res) =>
-        res.text()
-      ),
+      fetch(
+        new URL(`./${appearanceFolder}/${appearanceFile}.html`, import.meta.url)
+      ).then((res) => res.text()),
+      fetch(
+        new URL(`./${appearanceFolder}/${appearanceFile}.css`, import.meta.url)
+      ).then((res) => res.text()),
     ]);
 
     this.shadowRoot.innerHTML = `
@@ -26,6 +27,7 @@ class AppHeader extends HTMLElement {
     `;
 
     this.initContent(appearance);
+    this.removeBackButtonIfAtHome();
 
     // Traducir su shadowRoot (por si ya está lista la traducción)
     TranslationService.translatePage(this.shadowRoot);
@@ -37,23 +39,32 @@ class AppHeader extends HTMLElement {
   initContent(appearance) {
     const site = storeConfig.site;
 
-    if (appearance === "navbar") {
-      const homeBtn = this.shadowRoot.getElementById("home-btn");
-      if (homeBtn) {
-        homeBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          if (typeof window.loadPage === "function") {
-            window.loadPage("service-menu");
-          } else {
-            window.location.href = site.url;
-          }
-        });
-      }
-    } else {
+    const homeBtn = this.shadowRoot.getElementById("home-btn");
+    if (homeBtn) {
+      homeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (typeof window.loadPage === "function") {
+          window.loadPage("service-menu");
+        } else {
+          window.location.href = site.url;
+        }
+      });
+    }
+
+    // Contenido específico de cover
+    if (appearance === "cover") {
       this.shadowRoot.getElementById("header-title").textContent =
         site.shortName;
       this.shadowRoot.getElementById("header-subtitle").textContent =
         site.subtitle;
+    }
+  }
+
+  removeBackButtonIfAtHome() {
+    const isAtHome = window.currentPage === "home";
+    const backButton = this.shadowRoot.querySelector("back-button");
+    if (backButton) {
+      backButton.style.display = isAtHome ? "none" : "inline-flex";
     }
   }
 }

@@ -26,3 +26,19 @@ header .header-content {
     position: relative;
     z-index: 1;
 }
+
+.home-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+}
+
+.home-btn:hover {
+    text-decoration: underline;
+}
