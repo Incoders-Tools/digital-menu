@@ -99,14 +99,17 @@ export class CategorySlider extends HTMLElement {
 
     const sliderInstance = window.tns({
       container,
-      items: 3,
+      items: 1,
       slideBy: "page",
       autoplay: false,
       nav: false,
+      loop: false,
+      gutter: 10,
       controls: false,
       responsive: {
         640: { items: 4 },
         900: { items: 5 },
+        1200: { items: 6 },
       },
     });
 
