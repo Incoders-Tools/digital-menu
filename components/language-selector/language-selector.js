@@ -219,5 +219,4 @@ class LanguageSelector extends HTMLElement {
   }
 }
 
-// Registrar el componente
 customElements.define("language-selector", LanguageSelector);

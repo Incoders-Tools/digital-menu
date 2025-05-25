@@ -65,3 +65,30 @@
     height: 16px;
     margin-right: 8px;
 }
+
+@media screen and (max-width: 768px) {
+    .selected-language span {
+        display: none;
+    }
+
+    .language-dropdown span {
+        display: none;
+    }
+
+    .language-selector {
+        padding: 5px;
+        /* más compacto en mobile */
+    }
+
+    .selected-language img,
+    .language-dropdown img {
+        width: 20px;
+        height: 14px;
+        margin: 0;
+    }
+
+    .language-dropdown li {
+        padding: 6px 8px;
+        justify-content: center;
+    }
+}
