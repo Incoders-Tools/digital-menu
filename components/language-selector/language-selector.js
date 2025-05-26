@@ -1,5 +1,6 @@
 import { storeConfig } from "../../config/config.js";
 import TranslationService from "../../assets/i18n/translationService.js";
+import DeviceService from "../../services/deviceService.js";
 
 class LanguageSelector extends HTMLElement {
   constructor() {
@@ -173,22 +174,29 @@ class LanguageSelector extends HTMLElement {
 
   _toggleDropdown() {
     const dropdown = this.shadowRoot.querySelector(".language-dropdown");
-    if (!dropdown) return;
+    const container = this.shadowRoot.querySelector(".language-selector");
+    if (!dropdown || !container) return;
 
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
       dropdown.classList.add("open");
+      if (DeviceService.isMobile()) {
+        container.classList.add("mobile-expanded");
+      }
     } else {
       dropdown.classList.remove("open");
+      container.classList.remove("mobile-expanded");
     }
   }
 
   _closeDropdown() {
     const dropdown = this.shadowRoot.querySelector(".language-dropdown");
-    if (!dropdown) return;
+    const container = this.shadowRoot.querySelector(".language-selector");
+    if (!dropdown || !container) return;
 
     dropdown.classList.remove("open");
+    container.classList.remove("mobile-expanded");
     this.isOpen = false;
   }
 

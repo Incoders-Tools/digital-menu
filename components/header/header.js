@@ -10,7 +10,7 @@ class AppHeader extends HTMLElement {
 
   async connectedCallback() {
     const appearance = storeConfig.site.header.appearance || "navbar";
-    const appearanceFile = appearance.toLowerCase(); // "cover", "navbar", etc.
+    const appearanceFile = appearance.toLowerCase(); // "cover", "navbar", "navbar-logo" etc.
     const appearanceFolder = appearance.toLowerCase();
 
     const [html, css] = await Promise.all([
@@ -77,7 +77,11 @@ class AppHeader extends HTMLElement {
 
     // Mostrar u ocultar el botón correspondiente
     if (backButton) {
-      backButton.style.display = isMobile && !isHome ? "inline-flex" : "none";
+      if (isMobile && !isHome) {
+        backButton.classList.remove("hidden");
+      } else {
+        backButton.classList.add("hidden");
+      }
     }
 
     if (homeBtn) {

@@ -71,24 +71,49 @@
         display: none;
     }
 
+    .language-dropdown {
+        transition: transform 0.2s ease;
+        z-index: 10000;
+    }
+
     .language-dropdown span {
         display: none;
     }
 
     .language-selector {
         padding: 5px;
-        /* más compacto en mobile */
     }
 
     .selected-language img,
     .language-dropdown img {
-        width: 20px;
-        height: 14px;
+        width: 40px;
+        height: 28px;
         margin: 0;
     }
 
     .language-dropdown li {
         padding: 6px 8px;
         justify-content: center;
+    }
+
+    .language-dropdown.open {
+        transform: scale(2);
+        transform-origin: top right;
+        z-index: 10000;
+    }
+
+    .language-dropdown.open li {
+        padding: 10px 14px;
+    }
+
+    .language-selector.mobile-expanded {
+        padding: 10px;
+        background-color: #f5f5f5;
+        border-radius: 6px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .language-selector.mobile-expanded .language-dropdown {
+        transform: scale(1.1);
     }
 }
