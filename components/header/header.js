@@ -1,5 +1,6 @@
 import { storeConfig } from "../../config/config.js";
 import TranslationService from "../../assets/i18n/translationService.js";
+import NavigationService from "../../services/NavigationService.js";
 
 class AppHeader extends HTMLElement {
   constructor() {
@@ -27,10 +28,16 @@ class AppHeader extends HTMLElement {
     `;
 
     this.initContent(appearance);
-    this.removeBackButtonIfAtHome();
 
     // Traducir su shadowRoot (por si ya está lista la traducción)
     TranslationService.translatePage(this.shadowRoot);
+
+    // Suscribirse a cambios de navegación
+    NavigationService.onPageChange(() => this.updateButtonVisibility());
+
+    this.updateButtonVisibility();
+
+    window.addEventListener("resize", () => this.updateButtonVisibility());
 
     // Informar que ya está listo
     this.dispatchEvent(new CustomEvent("componentReady", { bubbles: true }));
@@ -60,12 +67,34 @@ class AppHeader extends HTMLElement {
     }
   }
 
-  removeBackButtonIfAtHome() {
-    const isAtHome = window.currentPage === "home";
+  updateButtonVisibility() {
+    const isHome = NavigationService.isHome();
     const backButton = this.shadowRoot.querySelector("back-button");
+    const homeBtn = this.shadowRoot.getElementById("home-btn");
+
+    // Detectar si estamos en mobile (viewport <= 768px)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    // Mostrar u ocultar el botón correspondiente
     if (backButton) {
-      backButton.style.display = isAtHome ? "none" : "inline-flex";
+      backButton.style.display = isMobile && !isHome ? "inline-flex" : "none";
     }
+
+    if (homeBtn) {
+      if (!isMobile && !isHome) {
+        homeBtn.style.visibility = "visible";
+        homeBtn.style.opacity = "1";
+        homeBtn.style.pointerEvents = "auto";
+      } else {
+        homeBtn.style.visibility = "hidden";
+        homeBtn.style.opacity = "0";
+        homeBtn.style.pointerEvents = "none";
+      }
+    }
+  }
+
+  isMobileView() {
+    return window.matchMedia("(max-width: 768px)").matches;
   }
 }
 

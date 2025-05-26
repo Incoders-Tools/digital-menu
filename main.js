@@ -13,6 +13,7 @@ import "./components/service-menu/desserts-service/desserts-service.js";
 console.log("Entorno activo:", storeConfig.site.url);
 
 import TranslationService from "./assets/i18n/translationService.js";
+import NavigationService from "./services/NavigationService.js";
 
 // Cargar idioma y traducir la página
 await TranslationService.loadTranslations();
@@ -29,4 +30,8 @@ window.loadPage = function (componentName) {
 
   const comp = document.createElement(componentName);
   mainContent.appendChild(comp);
+
+  // Actualizar estado de navegación
+  const isHome = componentName === "service-menu";
+  NavigationService.setCurrentPage(isHome ? "home" : componentName);
 };
