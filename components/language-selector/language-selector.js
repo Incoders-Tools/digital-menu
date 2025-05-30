@@ -2,7 +2,6 @@ import { storeConfig } from "../../config/config.js";
 import { DeviceService } from "../../services/device-service.js";
 import TranslationService from "../../assets/i18n/translationService.js";
 
-
 class LanguageSelector extends HTMLElement {
   constructor() {
     super();
@@ -71,6 +70,7 @@ class LanguageSelector extends HTMLElement {
         this.shadowRoot.innerHTML += html;
 
         this._updateFlagPaths();
+        this._renderLanguageOptions();
         this._setupEventListeners();
         this._updateSelectedLanguage(this.currentLang);
       })
@@ -103,26 +103,9 @@ class LanguageSelector extends HTMLElement {
     const dropdown = document.createElement("div");
     dropdown.className = "language-dropdown";
 
+    this._renderLanguageOptions();
+
     const langList = document.createElement("ul");
-
-    // Crear elementos para cada idioma
-    Object.entries(this.languages).forEach(([lang, name]) => {
-      const li = document.createElement("li");
-      li.dataset.lang = lang;
-      li.addEventListener("click", () => this._selectLanguage(lang));
-
-      const img = document.createElement("img");
-      img.src = `${this.basePath}flags/${lang}.svg`;
-      img.alt = name;
-
-      const span = document.createElement("span");
-      span.textContent = name;
-
-      li.appendChild(img);
-      li.appendChild(span);
-      langList.appendChild(li);
-    });
-
     dropdown.appendChild(langList);
     container.appendChild(selectedLang);
     container.appendChild(dropdown);
@@ -201,6 +184,7 @@ class LanguageSelector extends HTMLElement {
       this.currentLang = lang;
       localStorage.setItem("selectedLanguage", lang);
       this._updateSelectedLanguage(lang);
+      this._renderLanguageOptions();
 
       TranslationService.loadTranslations(lang);
     }
@@ -220,6 +204,33 @@ class LanguageSelector extends HTMLElement {
     selectedImg.src = `${this.basePath}flags/${lang}.svg`;
     selectedImg.alt = langName;
     selectedText.textContent = langName;
+  }
+
+  _renderLanguageOptions() {
+    const langList = this.shadowRoot.querySelector(".language-dropdown ul");
+    if (!langList) return;
+
+    langList.innerHTML = ""; // limpiar lista
+
+    Object.entries(this.languages).forEach(([lang, name]) => {
+      if (lang === this.currentLang) return; // excluir el idioma seleccionado
+
+      const li = document.createElement("li");
+      li.dataset.lang = lang;
+
+      const img = document.createElement("img");
+      img.src = `${this.basePath}flags/${lang}.svg`;
+      img.alt = name;
+
+      const span = document.createElement("span");
+      span.textContent = name;
+
+      li.appendChild(img);
+      li.appendChild(span);
+
+      li.addEventListener("click", () => this._selectLanguage(lang));
+      langList.appendChild(li);
+    });
   }
 }
 
