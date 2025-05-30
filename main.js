@@ -10,7 +10,7 @@ import "./components/service-menu/drinks-service/drinks-service.js";
 import "./components/service-menu/desserts-service/desserts-service.js";
 
 import TranslationService from "./assets/i18n/translationService.js";
-import { navigationService } from './services/navigationService.js';
+import { navigationService } from './services/navigation-service.js';
 
 // Cargar idioma y traducir la página
 await TranslationService.loadTranslations();

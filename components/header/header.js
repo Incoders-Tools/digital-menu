@@ -1,6 +1,6 @@
 import { storeConfig } from "../../config/config.js";
 import TranslationService from "../../assets/i18n/translationService.js";
-import { navigationService } from "../../services/navigationService.js";
+import { navigationService } from "../../services/navigation-service.js";
 
 class AppHeader extends HTMLElement {
   constructor() {
