@@ -1,6 +1,6 @@
 import { storeConfig } from "../../config/config.js";
 import TranslationService from "../../assets/i18n/translationService.js";
-import NavigationService from "../../services/NavigationService.js";
+import { navigationService } from "../../services/navigationService.js";
 
 class AppHeader extends HTMLElement {
   constructor() {
@@ -33,7 +33,7 @@ class AppHeader extends HTMLElement {
     TranslationService.translatePage(this.shadowRoot);
 
     // Suscribirse a cambios de navegación
-    NavigationService.onPageChange(() => this.updateButtonVisibility());
+    navigationService.onPageChange(() => this.updateButtonVisibility());
 
     this.updateButtonVisibility();
 
@@ -68,7 +68,7 @@ class AppHeader extends HTMLElement {
   }
 
   updateButtonVisibility() {
-    const isHome = NavigationService.isHome();
+    const isHome = navigationService.isHome();
     const backButton = this.shadowRoot.querySelector("back-button");
     const homeBtn = this.shadowRoot.getElementById("home-btn");
 

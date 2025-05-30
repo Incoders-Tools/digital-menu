@@ -81,7 +81,7 @@
     }
 
     .language-selector {
-        padding: 5px;
+        top: 15px;
     }
 
     .selected-language img,

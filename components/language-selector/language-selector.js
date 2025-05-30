@@ -1,6 +1,7 @@
 import { storeConfig } from "../../config/config.js";
+import { DeviceService } from "../../services/deviceService.js";
 import TranslationService from "../../assets/i18n/translationService.js";
-import DeviceService from "../../services/deviceService.js";
+
 
 class LanguageSelector extends HTMLElement {
   constructor() {

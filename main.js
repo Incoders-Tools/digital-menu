@@ -1,4 +1,3 @@
-import { storeConfig } from "./config/config.js";
 import "./components/header/header.js";
 import "./components/footer/footer.js";
 import "./components/mobile-navbar/mobile-navbar.js";
@@ -11,7 +10,7 @@ import "./components/service-menu/drinks-service/drinks-service.js";
 import "./components/service-menu/desserts-service/desserts-service.js";
 
 import TranslationService from "./assets/i18n/translationService.js";
-import NavigationService from "./services/NavigationService.js";
+import { navigationService } from './services/navigationService.js';
 
 // Cargar idioma y traducir la página
 await TranslationService.loadTranslations();
@@ -31,5 +30,5 @@ window.loadPage = function (componentName) {
 
   // Actualizar estado de navegación
   const isHome = componentName === "service-menu";
-  NavigationService.setCurrentPage(isHome ? "home" : componentName);
+  navigationService.setCurrentPage(isHome ? "home" : componentName);
 };

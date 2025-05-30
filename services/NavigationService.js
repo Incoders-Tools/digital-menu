@@ -1,26 +1,26 @@
-class NavigationService {
-  constructor() {
-    this.currentPage = "home"; // por defecto al inicio
-    this.listeners = new Set();
-  }
+export class NavigationService {
+    constructor() {
+        this.currentPage = "home";
+        this.listeners = new Set();
+    }
 
-  setCurrentPage(page) {
-    this.currentPage = page;
-    this.notify();
-  }
+    setCurrentPage(page) {
+        this.currentPage = page;
+        this.notify();
+    }
 
-  isHome() {
-    return this.currentPage === "home";
-  }
+    isHome() {
+        return this.currentPage === "home";
+    }
 
-  onPageChange(callback) {
-    this.listeners.add(callback);
-  }
+    onPageChange(callback) {
+        this.listeners.add(callback);
+    }
 
-  notify() {
-    this.listeners.forEach((callback) => callback(this.currentPage));
-  }
+    notify() {
+        this.listeners.forEach(callback => callback(this.currentPage));
+    }
 }
 
-const navigationService = new NavigationService();
-export default navigationService;
+// Exportamos una única instancia
+export const navigationService = new NavigationService();

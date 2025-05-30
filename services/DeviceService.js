@@ -1,18 +1,20 @@
-const DeviceService = {
-  isMobile() {
-    return window.innerWidth <= 768;
-  },
-  isTablet() {
-    return window.innerWidth > 768 && window.innerWidth <= 1024;
-  },
-  isDesktop() {
-    return window.innerWidth > 1024;
-  },
-  getDeviceType() {
-    if (this.isMobile()) return "mobile";
-    if (this.isTablet()) return "tablet";
-    return "desktop";
-  },
-};
+export class DeviceService {
 
-export default DeviceService;
+    static isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    static isTablet() {
+        return window.innerWidth > 768 && window.innerWidth <= 1024;
+    }
+
+    static isDesktop() {
+        return window.innerWidth > 1024;
+    }
+
+    static getDeviceType() {
+        if (this.isMobile()) return "mobile";
+        if (this.isTablet()) return "tablet";
+        return "desktop";
+    }
+}

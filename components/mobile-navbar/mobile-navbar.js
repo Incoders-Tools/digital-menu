@@ -1,5 +1,5 @@
 import { storeConfig } from "../../config/config.js";
-import DeviceService from "../../services/deviceService.js";
+import { DeviceService } from "../../services/deviceService.js";
 
 class MobileNavBar extends HTMLElement {
   constructor() {
