@@ -31,11 +31,17 @@ class LanguageSelector extends HTMLElement {
     this.currentLang =
       localStorage.getItem("selectedLanguage") || storeConfig.default.language;
 
-    // Configurar los event listeners después de que el contenido se haya cargado
-    setTimeout(() => {
-      this._setupEventListeners();
+    // Si ya está todo traducido antes de que se conecte el componente
+    if (window.translationReady) {
       this._updateSelectedLanguage(this.currentLang);
-    }, 0);
+    }
+
+    // En caso de que se traduzca después de montar
+    document.addEventListener("translationsReady", () => {
+      this._updateSelectedLanguage(
+        localStorage.getItem("selectedLanguage") || storeConfig.default.language
+      );
+    });
   }
 
   _getBasePath() {
@@ -43,44 +49,33 @@ class LanguageSelector extends HTMLElement {
   }
 
   _loadResources() {
-    // Obtener rutas
     const cssURL = `${this.basePath}language-selector.css`;
     const htmlURL = `${this.basePath}language-selector.html`;
 
-    // Cargar el CSS con fetch y colocarlo como <style>
-    fetch(cssURL)
-      .then((res) => {
+    Promise.all([
+      fetch(cssURL).then((res) => {
         if (!res.ok) throw new Error(`Error cargando CSS: ${res.status}`);
         return res.text();
-      })
-      .then((cssText) => {
+      }),
+      fetch(htmlURL).then((res) => {
+        if (!res.ok) throw new Error(`Error cargando HTML: ${res.status}`);
+        return res.text();
+      }),
+    ])
+      .then(([cssText, html]) => {
         const style = document.createElement("style");
         style.textContent = cssText;
         this.shadowRoot.appendChild(style);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
 
-    // Cargar el HTML
-    fetch(htmlURL)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Error cargando HTML: ${res.status}`);
-        return res.text();
-      })
-      .then((html) => {
         this.shadowRoot.innerHTML += html;
 
-        // Actualizar rutas de imágenes de banderas
         this._updateFlagPaths();
-
-        // Configurar listeners e idioma
         this._setupEventListeners();
         this._updateSelectedLanguage(this.currentLang);
       })
       .catch((error) => {
-        console.error("Error cargando el template HTML:", error);
-        this._createBasicStructure(); // fallback si falla el HTML
+        console.error("Error cargando recursos:", error);
+        this._createBasicStructure(); // fallback si falla
       });
   }
 
