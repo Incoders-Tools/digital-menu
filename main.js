@@ -10,8 +10,6 @@ import "./components/service-menu/main-service/main-service.js";
 import "./components/service-menu/drinks-service/drinks-service.js";
 import "./components/service-menu/desserts-service/desserts-service.js";
 
-console.log("Entorno activo:", storeConfig.site.url);
-
 import TranslationService from "./assets/i18n/translationService.js";
 import NavigationService from "./services/NavigationService.js";
 

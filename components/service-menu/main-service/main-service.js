@@ -9,8 +9,6 @@ class MainService extends HTMLElement {
   }
 
   async connectedCallback() {
-    console.log("🧩 main-service conectado", performance.now());
-
     const [html, css] = await Promise.all([
       fetch(
         import.meta.url.replace("main-service.js", "main-service.html")
@@ -114,10 +112,6 @@ class MainService extends HTMLElement {
     });
 
     container.appendChild(section);
-  }
-
-  disconnectedCallback() {
-    console.log("🧹 main-service desconectado");
   }
 }
 
