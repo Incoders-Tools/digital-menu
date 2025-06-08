@@ -1,44 +1,27 @@
 import { storeConfig } from "../../../config/config.js";
+import { BaseComponent } from "../../base/base-component.js";
 import "../../../components/category-slider/category-slider.js";
 
-class DrinksService extends HTMLElement {
+class DrinksService extends BaseComponent {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
     this.products = [];
   }
 
-  async connectedCallback() {
-    const [html, css] = await Promise.all([
-      fetch(
-        import.meta.url.replace("drinks-service.js", "drinks-service.html")
-      ).then((res) => res.text()),
-      fetch(
-        import.meta.url.replace("drinks-service.js", "drinks-service.css")
-      ).then((res) => res.text()),
-    ]);
-
-    const style = document.createElement("style");
-    style.textContent = css;
-    this.shadowRoot.innerHTML = html;
-    this.shadowRoot.prepend(style);
-
+  async onConnected() {
+    await this.loadTemplate(import.meta.url);
     await this.loadProducts();
 
     const slider = this.shadowRoot.querySelector("category-slider");
-
-    // Inyectar categorías al slider
     const categories = this.extractCategories();
     if (slider) {
-      slider.setCategories(categories); // usamos un método del slider
+      slider.setCategories(categories);
+      slider.addEventListener("categorySelected", (e) => {
+        this.renderDrinks(e.detail.category);
+      });
     }
 
-    // Escuchar evento del slider
-    slider?.addEventListener("categorySelected", (e) => {
-      this.renderDrinks(e.detail.category);
-    });
-
-    this.renderDrinks(); // Render por defecto "all"
+    this.renderDrinks();
   }
 
   async loadProducts() {

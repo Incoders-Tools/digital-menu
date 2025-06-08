@@ -1,28 +1,16 @@
 import { storeConfig } from "../../../config/config.js";
+import { BaseComponent } from "../../base/base-component.js";
 
-class FullService extends HTMLElement {
+class FullService extends BaseComponent {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
     this.products = [];
   }
 
-  async connectedCallback() {
-    const [html, css] = await Promise.all([
-      fetch(
-        import.meta.url.replace("full-service.js", "full-service.html")
-      ).then((res) => res.text()),
-      fetch(
-        import.meta.url.replace("full-service.js", "full-service.css")
-      ).then((res) => res.text()),
-    ]);
-
-    const style = document.createElement("style");
-    style.textContent = css;
-    this.shadowRoot.innerHTML = html;
-    this.shadowRoot.prepend(style);
-
+  async onConnected() {
+    await this.loadTemplate(import.meta.url);
     await this.loadProducts();
+
     this.renderFullMenu("all");
   }
 

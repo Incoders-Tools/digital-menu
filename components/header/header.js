@@ -96,10 +96,6 @@ class AppHeader extends HTMLElement {
       }
     }
   }
-
-  isMobileView() {
-    return window.matchMedia("(max-width: 768px)").matches;
-  }
 }
 
 customElements.define("app-header", AppHeader);

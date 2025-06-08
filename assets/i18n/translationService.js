@@ -6,7 +6,9 @@ const TranslationService = (() => {
 
   const loadTranslations = async (lang = currentLang) => {
     try {
-      const res = await fetch(`${storeConfig.site.url}/assets/i18n/${lang}.json`);
+      const res = await fetch(
+        `${storeConfig.site.url}/assets/i18n/${lang}.json`
+      );
       translations = await res.json();
       currentLang = lang;
       localStorage.setItem("selectedLanguage", lang);
@@ -22,8 +24,8 @@ const TranslationService = (() => {
 
   const t = (key) => translations[key] || key;
 
-  const translatePage = () => {
-    translateElementTree(document);
+  const translatePage = (root = document) => {
+    translateElementTree(root);
   };
 
   const translateElementTree = (root) => {
