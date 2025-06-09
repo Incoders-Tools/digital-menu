@@ -27,6 +27,11 @@ export const storeConfig = {
     },
   },
 
+  // Features
+  features: {
+    showProductCarousel: true,
+  },
+
   // Defaults
   default: {
     language: "es",

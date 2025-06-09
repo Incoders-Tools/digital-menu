@@ -40,4 +40,15 @@ export class BaseComponent extends HTMLElement {
     this.shadowRoot.innerHTML = html;
     this.shadowRoot.prepend(style);
   }
+
+  /**
+   * Carga HTML y CSS desde strings (útil si los importás como texto).
+   */
+  loadTemplateFromText(html, css) {
+    const style = document.createElement("style");
+    style.textContent = css;
+
+    this.shadowRoot.innerHTML = html;
+    this.shadowRoot.prepend(style);
+  }
 }

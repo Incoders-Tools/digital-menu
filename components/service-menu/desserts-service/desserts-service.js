@@ -1,6 +1,7 @@
 import { storeConfig } from "../../../config/config.js";
 import { BaseComponent } from "../../base/base-component.js";
 import "../../../components/category-slider/category-slider.js";
+import "../../../components/product-carousel/product-carousel.js";
 
 class DessertsService extends BaseComponent {
   constructor() {
@@ -19,6 +20,14 @@ class DessertsService extends BaseComponent {
       slider.addEventListener("categorySelected", (e) => {
         this.renderDesserts(e.detail.category);
       });
+    }
+
+    if (storeConfig.features.showProductCarousel) {
+      const carousel = this.shadowRoot.querySelector("product-carousel");
+      if (carousel) {
+        const featured = this.products.slice(0, 5); // productos hardcode: primeros 5
+        carousel.setProducts(featured);
+      }
     }
 
     this.renderDesserts();
