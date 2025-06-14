@@ -1,4 +1,5 @@
 import TranslationService from "../../assets/i18n/translationService.js";
+import { FeatureService } from "../../services/feature-service.js";
 
 export class BaseComponent extends HTMLElement {
   constructor() {
@@ -50,5 +51,12 @@ export class BaseComponent extends HTMLElement {
 
     this.shadowRoot.innerHTML = html;
     this.shadowRoot.prepend(style);
+  }
+
+  /**
+   * Agrega productos al carrusel si está habilitado en storeConfig
+   */
+  setupProductCarousel(products = []) {
+    FeatureService.setCarouselProducts(this, products);
   }
 }

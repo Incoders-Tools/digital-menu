@@ -8,7 +8,6 @@ class ProductCarousel extends BaseComponent {
 
   async onConnected() {
     await this.loadTemplate(import.meta.url);
-    this.renderCarousel(); // para cuando quieras usar productos hardcodeados por defecto
   }
 
   setProducts(products) {
@@ -27,12 +26,24 @@ class ProductCarousel extends BaseComponent {
       card.className = "carousel-card";
 
       card.innerHTML = `
-        <img class="product-image" src="${product.image || '/assets/img/placeholder-dessert.jpg'}" alt="${product.name}" />
+        <img class="product-image" src="${
+          product.image || "/assets/img/placeholder-dessert.jpg"
+        }" alt="${product.name}" />
         <div class="product-info">
           <div class="product-name">${product.name}</div>
-          ${product.description ? `<div class="product-description">${product.description}</div>` : ""}
-          ${product.ingredients ? `<div class="product-ingredients">Ingredientes: ${product.ingredients}</div>` : ""}
-          <div class="product-price-size">${product.price}${product.size ? " - " + product.size : ""}</div>
+          ${
+            product.description
+              ? `<div class="product-description">${product.description}</div>`
+              : ""
+          }
+          ${
+            product.ingredients
+              ? `<div class="product-ingredients">Ingredientes: ${product.ingredients}</div>`
+              : ""
+          }
+          <div class="product-price-size">${product.price}${
+        product.size ? " - " + product.size : ""
+      }</div>
         </div>
       `;
 

@@ -1,5 +1,6 @@
 import { storeConfig } from "../../../config/config.js";
 import { BaseComponent } from "../../base/base-component.js";
+import "../../../components/product-carousel/product-carousel.js";
 
 class FullService extends BaseComponent {
   constructor() {
@@ -10,6 +11,8 @@ class FullService extends BaseComponent {
   async onConnected() {
     await this.loadTemplate(import.meta.url);
     await this.loadProducts();
+
+    this.setupProductCarousel(this.products);
 
     this.renderFullMenu("all");
   }

@@ -21,6 +21,8 @@ class DrinksService extends BaseComponent {
       });
     }
 
+    this.setupProductCarousel(this.products);
+
     this.renderDrinks();
   }
 

@@ -27,9 +27,16 @@ export const storeConfig = {
     },
   },
 
-  // Features
   features: {
-    showProductCarousel: true,
+    productCarousel: {
+      visibility: {
+        dessertsService: true,
+        fullService: true,
+        drinksService: false,
+        startersService: false,
+        mainService: false,
+      },
+    },
   },
 
   // Defaults

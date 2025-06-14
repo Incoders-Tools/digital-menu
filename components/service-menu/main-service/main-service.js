@@ -21,6 +21,8 @@ class MainService extends BaseComponent {
       });
     }
 
+    this.setupProductCarousel(this.products);
+
     this.renderMainCourses();
   }
 

@@ -21,6 +21,8 @@ class StartersService extends BaseComponent {
       });
     }
 
+    this.setupProductCarousel(this.products);
+
     this.renderStarters();
   }
 

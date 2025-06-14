@@ -30,7 +30,15 @@ export const storeConfig = {
 
   // Features
   features: {
-    showProductCarousel: false,
+    productCarousel: {
+      visibility: {
+        dessertsService: false,
+        fullService: true,
+        drinksService: false,
+        startersService: false,
+        mainService: false,
+      },
+    },
   },
 
   // Defaults

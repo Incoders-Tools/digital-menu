@@ -22,13 +22,7 @@ class DessertsService extends BaseComponent {
       });
     }
 
-    if (storeConfig.features.showProductCarousel) {
-      const carousel = this.shadowRoot.querySelector("product-carousel");
-      if (carousel) {
-        const featured = this.products.slice(0, 5); // productos hardcode: primeros 5
-        carousel.setProducts(featured);
-      }
-    }
+    this.setupProductCarousel(this.products);
 
     this.renderDesserts();
   }
